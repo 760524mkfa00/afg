@@ -44,7 +44,7 @@ class CreateAfgTableAndCategories extends Migration
 
         Schema::create('afgs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('project_number',10);
+            $table->string('project_number',10)->unique();
             $table->integer('region_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('location_id')->unsigned();
@@ -53,7 +53,7 @@ class CreateAfgTableAndCategories extends Migration
             $table->string('priority_number');
             $table->integer('priority_id')->unsigned();
             $table->string('year',4);
-            $table->double('estimate',8.2);
+            $table->double('estimate', 8, 2);
             $table->integer('manager_id')->unsigned();
             $table->timestamps();
 
