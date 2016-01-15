@@ -6,3 +6,5 @@ Homestead.json
 .idea
 .idea/workspace.xml
 .idea/vcs.xml
+public/index.php
+public/htaccess
