@@ -8,28 +8,3 @@ body {
   width: 100%;
   display: table;
 }
-
- .navbar {
-   //background-color: transparent;
-   //background: transparent;
-   //border-color: transparent;
-   opacity: 0.6;
-
-  .li {
-    color: #000;
-    background: rgba(0, 0, 0, 0.5);
-  }
- }
-
- .logo {
-   transform: translateX(-50%);
-   left: 50%;
-   position: absolute;
-
-   img {
-     display: block;
-     height:100%;
-     margin-bottom: 50px;
-   }
- }
-

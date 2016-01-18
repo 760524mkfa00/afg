@@ -5756,20 +5756,4 @@ body {
   width: 100%;
   display: table; }
 
-.navbar {
-  opacity: 0.6; }
-  .navbar .li {
-    color: #000;
-    background: rgba(0, 0, 0, 0.5); }
-
-.logo {
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  left: 50%;
-  position: absolute; }
-  .logo img {
-    display: block;
-    height: 100%;
-    margin-bottom: 50px; }
-
 /*# sourceMappingURL=app.css.map */
