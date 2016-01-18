@@ -8,3 +8,4 @@ Homestead.json
 .idea/vcs.xml
 public/index.php
 public/htaccess
+public/.htaccess
