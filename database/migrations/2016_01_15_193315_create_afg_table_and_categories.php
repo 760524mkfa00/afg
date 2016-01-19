@@ -77,9 +77,9 @@ class CreateAfgTableAndCategories extends Migration
                 ->references('id')
                 ->on('priorities');
 
-            $table->foreign('manager_id')
-                ->references('id')
-                ->on('users');
+//            $table->foreign('manager_id')
+//                ->references('id')
+//                ->on('users');
         });
     }
 
