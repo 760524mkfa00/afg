@@ -14,7 +14,7 @@
                             <th>Region</th>
                             <th>Category</th>
                             <th>Location</th>
-                            <th>Project Description</th>
+                            <th width="25%;">Project Description</th>
                             <th>Client</th>
                             <th>Priority</th>
                             <th>Req Priority</th>
@@ -42,8 +42,11 @@
                         </tr>
                         @endforeach
                         </tbody>
+
                     </table>
-                </div>
+
+
+                </div>{!! $data->render() !!}
             </div>
         </div>
     </div>
