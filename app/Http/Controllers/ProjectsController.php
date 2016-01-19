@@ -14,7 +14,7 @@ class ProjectsController extends Controller
     public function projects()
     {
 
-        $data = Afg::all();
+        $data = Afg::with(['categories', 'clients', 'locations', 'priorities', 'regions', 'managers'])->get();
         return view('projects.projects')
             ->withData($data);
     }

@@ -27,18 +27,18 @@
                         <tbody>
                         @foreach($data as $project)
                         <tr>
-                            <th scope="row">$project->project_number</th>
-                            <td>$project->region_id</td>
-                            <td>$project->category_id</td>
-                            <td>$project->location_id</td>
-                            <td>$project->project_description</td>
-                            <td>$project->client_id</td>
-                            <td>$project->priority_number</td>
-                            <td>$project->priority_id</td>
-                            <td>$project->year</td>
-                            <td>$project->estimate</td>
+                            <th scope="row">{{ $project->project_number }}</th>
+                            <td>{{ $project->regions->region }}</td>
+                            <td>{{ $project->categories->category }}</td>
+                            <td>{{ $project->locations->location }}</td>
+                            <td>{{ $project->project_description }}</td>
+                            <td>{{ $project->clients->client }}</td>
+                            <td>{{ $project->priority_number }}</td>
+                            <td>{{ $project->priorities->priority }}</td>
+                            <td>{{ $project->year }}</td>
+                            <td>{{ $project->estimate }}</td>
                             <td>Actual Value</td>
-                            <td>$project->manager_id</td>
+                            <td>{{ @$project->managers->name }}</td>
                         </tr>
                         @endforeach
                         </tbody>

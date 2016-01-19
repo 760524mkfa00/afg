@@ -20,7 +20,7 @@ class Afg extends Model
      */
     public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo('AFG\Category', 'category_id');
     }
 
     /**
@@ -28,7 +28,7 @@ class Afg extends Model
      */
     public function clients()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo('AFG\Client', 'client_id');
     }
 
     /**
@@ -36,7 +36,7 @@ class Afg extends Model
      */
     public function locations()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo('AFG\Location', 'location_id');
     }
 
     /**
@@ -44,7 +44,7 @@ class Afg extends Model
      */
     public function priorities()
     {
-        return $this->belongsTo(Priority::class);
+        return $this->belongsTo('AFG\Priority', 'priority_id');
     }
 
     /**
@@ -52,7 +52,7 @@ class Afg extends Model
      */
     public function regions()
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo('AFG\Region', 'region_id');
     }
 
     /**
@@ -60,7 +60,7 @@ class Afg extends Model
      */
     public function managers()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('AFG\User', 'manager_id');
     }
 
     /**
