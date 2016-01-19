@@ -109,9 +109,16 @@ class CommonTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+        [
             'name' => 'Kieran Fahy',
             'email' => 'kieran.fahy@sd23.bc.ca',
             'password' => bcrypt('password')
-        ]);
+        ],
+        [
+            'name' => 'Harold Schock',
+            'email' => 'harold.schock@sd23.bc.ca',
+            'password' => bcrypt('password')
+        ]
+]);
     }
 }

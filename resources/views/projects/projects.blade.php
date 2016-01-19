@@ -11,34 +11,34 @@
                         <thead>
                         <tr>
                             <th>Project #</th>
-                            <th>Region</th>
-                            <th>Category</th>
-                            <th>Location</th>
-                            <th width="25%;">Project Description</th>
-                            <th>Client</th>
-                            <th>Priority</th>
-                            <th>Req Priority</th>
-                            <th>Year Started</th>
-                            <th>Estimate</th>
-                            <th>Actual</th>
-                            <th>Manager</th>
+                            <th class="hidden-sm hidden-xs hidden-md">Region</th>
+                            <th class="hidden-sm hidden-xs">Category</th>
+                            <th class="hidden-sm hidden-xs">Location</th>
+                            <th>Project Description</th>
+                            <th class="hidden-sm hidden-xs">Client</th>
+                            <th class="hidden-sm hidden-xs">Priority</th>
+                            <th class="hidden-sm hidden-xs">Req Priority</th>
+                            <th class="hidden-sm hidden-xs">Year Started</th>
+                            <th class="hidden-sm hidden-xs">Estimate</th>
+                            <th class="hidden-sm hidden-xs">Actual</th>
+                            <th class="hidden-sm hidden-xs hidden-md">Manager</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($data as $project)
                         <tr>
                             <th scope="row">{{ $project->project_number }}</th>
-                            <td>{{ $project->regions->region }}</td>
-                            <td>{{ $project->categories->category }}</td>
-                            <td>{{ $project->locations->location }}</td>
+                            <td class="hidden-sm hidden-xs hidden-md">{{ $project->regions->region }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->categories->category }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->locations->location }}</td>
                             <td>{{ $project->project_description }}</td>
-                            <td>{{ $project->clients->client }}</td>
-                            <td>{{ $project->priority_number }}</td>
-                            <td>{{ $project->priorities->priority }}</td>
-                            <td>{{ $project->year }}</td>
-                            <td>{{ $project->estimate }}</td>
-                            <td>Actual Value</td>
-                            <td>{{ @$project->managers->name }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->clients->client }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->priority_number }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->priorities->priority }}</td>
+                            <td class="hidden-sm hidden-xs">{{ $project->year }}</td>
+                            <td class="hidden-sm hidden-xs">{{ number_format($project->estimate,2,'.',',') }}</td>
+                            <td class="hidden-sm hidden-xs">Actual Value</td>
+                            <td class="hidden-sm hidden-xs hidden-md">{{ @$project->managers->name }}</td>
                         </tr>
                         @endforeach
                         </tbody>

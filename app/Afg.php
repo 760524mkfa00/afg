@@ -71,4 +71,23 @@ class Afg extends Model
         return $this->hasMany(Tracking::class);
     }
 
+    public static function groupYear()
+    {
+
+        $query = \DB::table('afgs')
+            ->leftjoin('priorities', function($join)
+            {
+                $join->on('afgs.priority_id', '=', 'priorities.id');
+            })
+            ->select('priority', 'year', 'priority_id', \DB::raw('sum(estimate) as subTotal'))
+            ->groupBy('year')
+            ->groupBy('priority_id')
+            ->orderBy('year', 'asc')
+            ->orderBy('priority_id', 'asc')
+        ->get();
+
+        return $query;
+
+    }
+
 }
