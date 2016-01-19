@@ -103,7 +103,9 @@ class CommonTableSeeder extends Seeder
         DB::table('priorities')->insert([
             ['priority' => 'Immediate'],
             ['priority' => 'Short Term'],
-            ['priority' => 'Long Term']
+            ['priority' => 'Long Term'],
+            ['priority' => 'Planning'],
+            ['priority' => 'Complete']
         ]);
 
         DB::table('users')->insert([
