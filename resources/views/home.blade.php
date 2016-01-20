@@ -41,8 +41,8 @@
                                                     <div class="col-md-6">{!! number_format($test['subTotal'],2,'.',',') !!}</div>
                                                 @endforeach
 
-                                                <div class="col-md-12" style="position: absolute; bottom: 5px;">
-                                                    <strong>Total: </strong> ${!! number_format($total[$key],2,'.',',') !!}
+                                                <div class="col-md-12" style="position: absolute; bottom: 5px; text-align: center; font-size: x-large; font-weight: bold;">
+                                                    ${!! number_format($total[$key],2,'.',',') !!}
                                                 </div>
                                             </div>
                                         </div>
