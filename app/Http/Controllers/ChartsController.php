@@ -52,11 +52,22 @@ class ChartsController extends Controller
         }
 
         $data = Afg::categoriesChart($selectedYears, $selectedPriorities);
-
         if(count($data) < 1)
         {
             return back()->withMessage('No data found from your selections, showing previous selections.');
         }
+
+
+        $drilldown = Afg::categoriesDrilldown($selectedYears, $selectedPriorities);
+
+        foreach($drilldown as $sets => $values)
+        {
+            foreach($values as $key => $value) {
+
+                $schools[$sets][$key] = $value;
+            }
+        }
+
 
         foreach($data as $sets => $values)
         {
@@ -66,23 +77,51 @@ class ChartsController extends Controller
             }
         }
 
+
+        $i = 0;
         foreach($collection as $set)
         {
-            $categories[] = $set['category'];
-            $estimates[] = (double)$set['subTotal'];
+            $labels[] = $set['category'];
+            $categories[$i]['name'] = (string)$set['category'];
+            $categories[$i]['y'] = (double)$set['subTotal'];
+            $categories[$i]['drilldown'] = $set['category'];
+
+            $dd[$i]['name'] = $set['category'];
+            $dd[$i]['id'] = $set['category'];
+            $dd[$i]['data'] = [];
+
+
+
+            foreach($schools as $value)
+            {
+                if($value['category'] == $dd[$i]['name'])
+                {
+                    $dd[$i]['data'][] = [$value['location'] , $value['estimate']];
+                }
+            }
+
+            $i++;
         }
 
-
-        $chart["chart"] = array("type" => "bar");
-        $chart["title"] = array("text" => "CATEGORY");
-        $chart["xAxis"] = array("categories" => $categories);
-        $chart["yAxis"] = array("title" => array("text" => "total"));
-        $chart['plotOptions'] = ['bar' => ['dataLabels' => ['enabled' => 'true']]];
+        $chart["chart"] = array("type" => "column");
+        $chart["title"] = array("text" => "Browse Categories");
+        $chart["xAxis"] = array("type" => "category");
+        $chart["yAxis"] = array("title" => array("text" => "Total Estimated Cost"));
+        $chart['legend'] = array('enabled' => false);
+        $chart['plotOptions'] = ['column' => ["borderWidth" => 0,'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "{point.y:.2f}"]]];
         $chart['credits'] = array('enabled' => false);
+        $chart['tooltip'] = [
+            'headerFormat' => '<span style="font-size:11px">{series.name}</span><br>',
+            'pointFormat' => '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b> of total<br/>'
+        ];
         $chart["series"] = array(
-            array("name" => "Estimate",
-                "data" => $estimates)
+            array("name" => "Categories",
+                "colourByPoint" => true,
+                "data" => $categories)
         );
+
+        $chart['drilldown'] = ["series" => $dd];
+
 
         return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));
 

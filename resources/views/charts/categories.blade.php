@@ -55,7 +55,7 @@
         </div>
 
         <div class="col-md-7">
-            <div id="chart" style="height:800px;"></div>
+            <div id="chart" style="height:800px; width:100%;"></div>
         </div>
     </div>
 
@@ -66,5 +66,7 @@
     </script>
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 @stop
