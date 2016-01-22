@@ -12,25 +12,50 @@ class ChartsController extends Controller
 
     public function chart(Request $request)
     {
-
-        $this->validate($request, [
-            'year'=> 'required',
-            'priority' => 'required'
-        ]);
+        if(count($request->all())>0)
+        {
+            $this->validate($request, [
+                'year'=> 'required',
+                'priority' => 'required'
+            ]);
+        }
 
         $years  = Afg::groupBy('year')->lists('year');
-
         $priorities = Priority::groupBy('priority')->lists('priority');
-
         $selectedYears = $request->get('year') ?  $request->get('year') : $years;
-
         $selectedPriorities = $request->get('priority') ?  $request->get('priority') :  $priorities;
+
+        foreach($years as $year)
+        {
+            $yearBoxes[$year]['year'] = $year;
+            $yearBoxes[$year]['yearChecked'] = false;
+            foreach($selectedYears as $selectedYear)
+            {
+                if($selectedYear == $year)
+                {
+                    $yearBoxes[$year]['yearChecked'] = true;
+                }
+            }
+        }
+
+        foreach($priorities as $priority)
+        {
+            $priorityBoxes[$priority]['priority'] = $priority;
+            $priorityBoxes[$priority]['priorityChecked'] = false;
+            foreach($selectedPriorities as $selectedPriority)
+            {
+                if($selectedPriority == $priority)
+                {
+                    $priorityBoxes[$priority]['priorityChecked'] = true;
+                }
+            }
+        }
 
         $data = Afg::categoriesChart($selectedYears, $selectedPriorities);
 
         if(count($data) < 1)
         {
-            return back()->withMessage('No Data');
+            return back()->withMessage('No data found from your selections, showing previous selections.');
         }
 
         foreach($data as $sets => $values)
@@ -57,7 +82,7 @@ class ChartsController extends Controller
             array("name" => "Estimate", "data" => $estimates)
         ];
 
-        return view('charts.categories', compact('chart', 'years', 'selectedYears', 'selectedPriorities'));
+        return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));
 
     }
 }

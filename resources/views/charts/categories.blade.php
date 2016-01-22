@@ -3,7 +3,10 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-5 col-lg-offset-1">
+        <div class="col-md-3 col-lg-offset-1">
+            @if ( session()->has('message') )
+                <div class="alert alert-success alert-dismissable">{{ session()->get('message') }}</div>
+            @endif
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
@@ -13,20 +16,44 @@
                     </ul>
                 </div>
             @endif
+
             <form action="/chart" class="form-group">
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                        @foreach ($years as $year)
-                            <input tabindex="1" type="checkbox" name="year[]" id="{{$year}}" value="{{$year}}">{{$year}}<br/>
-                        @endforeach
-
-                        @foreach ($priorities as $priority)
-                            <input tabindex="1" type="checkbox" name="priority[]" id="{{$priority}}" value="{{$priority}}">{{$priority}}<br/>
-                        @endforeach
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Year</div>
+                            <div class="panel-body">
+                                @foreach($yearBoxes as $checkbox)
+                                    <div class="checkbox">
+                                        <label>
+                                            <input tabindex="1" type="checkbox" name="year[]" id="{{$checkbox['year']}}" value="{{$checkbox['year']}}" {{ ($checkbox['yearChecked']) ? 'checked=checked' : '' }}>{{$checkbox['year']}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Priority</div>
+                            <div class="panel-body">
+                                @foreach($priorityBoxes as $checkbox)
+                                    <div class="checkbox">
+                                        <label>
+                                            <input tabindex="1" type="checkbox" name="priority[]" id="{{$checkbox['priority']}}" value="{{$checkbox['priority']}}" {{ ($checkbox['priorityChecked']) ? 'checked=checked' : '' }}>{{$checkbox['priority']}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input type="submit" value="Update">
             </form>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div id="chart" style="height:800px;"></div>
         </div>
     </div>
@@ -36,38 +63,5 @@
             $('#chart').highcharts({!! json_encode($chart)!!});
         });
 
-
-//        $(document).ready(function () {
-//
-//            var categories = [];
-//
-//            // Listen for 'change' event, so this triggers when the user clicks on the checkboxes labels
-//            $('input[name="year[]"]').on('change', function (e) {
-//
-//                e.preventDefault();
-//                year = []; // reset
-//
-//                $('input[name="year[]"]:checked').each(function()
-//                {
-//                    year.push($(this).val());
-//                });
-//                token = $('#token').val();
-//                $.ajax({
-//                    'url' : '/chart',
-//                    'data' : {
-//                        y:year,
-//                        _token:token
-//                    },
-//                    'success': function(data) {
-//
-//                        visitorData(data);
-//
-//                    }
-//                });
-//            });
-//            function visitorData (data) {
-//                $('#chart').highcharts(data);
-//            }
-//        });
     </script>
 @stop
