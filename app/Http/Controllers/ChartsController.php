@@ -71,7 +71,7 @@ class ChartsController extends Controller
             $categories[] = $set['category'];
             $estimates[] = $set['subTotal'];
         }
-        dd($estimates);
+        
 
         $chart["chart"] = array("type" => "bar");
         $chart["title"] = array("text" => "CATEGORY");
@@ -81,7 +81,7 @@ class ChartsController extends Controller
 
         $chart["series"] = array(
             array("name" => "Estimate",
-                "data" => array(1,2,3,4,5,6,7,8))
+                "data" => $estimates)
         );
 
         return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));
