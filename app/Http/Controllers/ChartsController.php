@@ -96,7 +96,7 @@ class ChartsController extends Controller
             {
                 if($value['category'] == $dd[$i]['name'])
                 {
-                    $dd[$i]['data'][] = [$value['location'] , $value['estimate']];
+                    $dd[$i]['data'][] = [$value['location'] , (float)$value['estimate']];
                 }
             }
 

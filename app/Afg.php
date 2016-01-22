@@ -175,7 +175,7 @@ class Afg extends Model
             ->select('category', 'priority', 'location', 'year', 'estimate')
             ->whereIn('year', $years)
             ->whereIn('priority', $priority)
-            ->where('estimate', '>', 0)
+            ->where('estimate', '>', 1)
             ->orderBy('category_id', 'asc')
             ->get();
 
