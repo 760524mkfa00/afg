@@ -8,7 +8,7 @@
     <title>Annual Facilities Grant</title>
 
     <!-- JavaScripts -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{--<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>--}}
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
