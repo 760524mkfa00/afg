@@ -78,7 +78,7 @@ class ChartsController extends Controller
         $chart["xAxis"] = array("categories" => $categories);
         $chart["yAxis"] = array("title" => array("text" => "total"));
         $chart['plotOptions'] = ['bar' => ['dataLabels' => ['enabled' => 'true']]];
-
+        $chart['credits'] = array('enabled' => false);
         $chart["series"] = array(
             array("name" => "Estimate",
                 "data" => $estimates)
