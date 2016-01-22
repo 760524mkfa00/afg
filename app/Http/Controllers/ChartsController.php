@@ -71,6 +71,7 @@ class ChartsController extends Controller
             $categories[] = $set['category'];
             $estimates[] = $set['subTotal'];
         }
+        dd($estimates);
 
         $chart["chart"] = array("type" => "bar");
         $chart["title"] = array("text" => "CATEGORY");
