@@ -69,7 +69,7 @@ class ChartsController extends Controller
         foreach($collection as $set)
         {
             $categories[] = $set['category'];
-            $estimates[] = $set['subTotal'];
+            $estimates[] = (double)$set['subTotal'];
         }
 
 
