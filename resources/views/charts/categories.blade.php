@@ -59,9 +59,11 @@
     </div>
 
     <script type="text/javascript">
-        $(function(){
-            $('#chart').highcharts({!! json_encode($chart)!!});
+        $(document).ready(function() {
+            $(function () {
+                $('#chart').highcharts({!! json_encode($chart)!!});
         });
+    });
 
     </script>
 @stop
