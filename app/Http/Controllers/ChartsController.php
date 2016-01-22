@@ -2,26 +2,62 @@
 
 namespace AFG\Http\Controllers;
 
-
-use AFG\Category;
+use AFG\Afg;
+use AFG\Priority;
 use AFG\Http\Requests;
 use Illuminate\Http\Request;
-use AFG\Http\Controllers\Controller;
 
 class ChartsController extends Controller
 {
 
-    public function chart()
+    public function chart(Request $request)
     {
-        $categories = Category::lists('category');
-        $yourFirstChart["chart"] = array("type" => "bar");
-        $yourFirstChart["title"] = array("text" => "CATEGORY");
-        $yourFirstChart["xAxis"] = array("categories" => $categories);
-        //$yourFirstChart["yAxis"] = array("title" => array("text" => "Fruit eaten"));
 
-        $yourFirstChart["series"] = [
-            array("name" => "Jane", "data" => [1,0,4,5,7,98])
+        $this->validate($request, [
+            'year'=> 'required',
+            'priority' => 'required'
+        ]);
+
+        $years  = Afg::groupBy('year')->lists('year');
+
+        $priorities = Priority::groupBy('priority')->lists('priority');
+
+        $selectedYears = $request->get('year') ?  $request->get('year') : $years;
+
+        $selectedPriorities = $request->get('priority') ?  $request->get('priority') :  $priorities;
+
+        $data = Afg::categoriesChart($selectedYears, $selectedPriorities);
+
+        if(count($data) < 1)
+        {
+            return back()->withMessage('No Data');
+        }
+
+        foreach($data as $sets => $values)
+        {
+            foreach($values as $key => $value) {
+
+                $collection[$sets][$key] = $value;
+            }
+        }
+
+        foreach($collection as $set)
+        {
+            $categories[] = $set['category'];
+            $estimates[] = $set['subTotal'];
+        }
+
+        $chart["chart"] = array("type" => "bar");
+        $chart["title"] = array("text" => "CATEGORY");
+        $chart["xAxis"] = array("categories" => $categories);
+        $chart["yAxis"] = array("title" => array("text" => "total"));
+        $chart['plotOptions'] = ['bar' => ['dataLabels' => ['enabled' => 'true']]];
+
+        $chart["series"] = [
+            array("name" => "Estimate", "data" => $estimates)
         ];
-        return view('charts.categories', compact('yourFirstChart'));
+
+        return view('charts.categories', compact('chart', 'years', 'selectedYears', 'selectedPriorities'));
+
     }
 }

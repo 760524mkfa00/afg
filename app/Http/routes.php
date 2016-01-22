@@ -34,6 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/projects', 'ProjectsController@projects');
 
     Route::get('/chart', 'ChartsController@chart');
+    Route::post('/chart', 'ChartsController@chart');
 
 
 });

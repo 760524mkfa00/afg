@@ -90,4 +90,44 @@ class Afg extends Model
 
     }
 
+    public static function chart()
+    {
+        $query = \DB::table('afgs')
+            ->leftjoin('priorities', function($join)
+            {
+                $join->on('afgs.priority_id', '=', 'priorities.id');
+            })
+            ->select('priority', 'year', \DB::raw('sum(estimate) as subTotal'))
+            ->where('year', '=', '2016')
+            ->groupBy('year')
+            ->groupBy('priority_id')
+            ->orderBy('year', 'asc')
+            ->orderBy('priority_id', 'asc')
+            ->get();
+
+        return $query;
+    }
+
+    public static function categoriesChart($years, $priority)
+    {
+
+
+        $query = \DB::table('afgs')
+            ->leftjoin('categories', function($join)
+            {
+                $join->on('afgs.category_id', '=', 'categories.id');
+            })
+            ->leftjoin('priorities', function($join)
+            {
+                $join->on('afgs.priority_id', '=', 'priorities.id');
+            })
+            ->select('category', 'priority', 'year', \DB::raw('sum(estimate) as subTotal'))
+            ->whereIn('year', $years)
+            ->whereIn('priority', $priority)
+            ->groupBy('category_id')
+            ->orderBy('category_id', 'asc')
+            ->get();
+
+        return $query;
+    }
 }

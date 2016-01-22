@@ -22,4 +22,9 @@ class Priority extends Model
     {
         return $this->hasMany(Afg::class);
     }
+
+    public function listPriorities()
+    {
+        return Priority::lists('priority','id')->toArray();
+    }
 }

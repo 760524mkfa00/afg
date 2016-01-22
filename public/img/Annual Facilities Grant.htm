@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Annual Facilities Grant</title>
+
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="Annual%20Facilities%20Grant_files/jquery-2.js"></script>
+    <script type="text/javascript" src="Annual%20Facilities%20Grant_files/bootstrap.js"></script>
+    <script type="text/javascript" src="Annual%20Facilities%20Grant_files/highcharts.js"></script>
+    
+    <!-- Fonts -->
+    <link href="Annual%20Facilities%20Grant_files/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="Annual%20Facilities%20Grant_files/css.css" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+         <link href="Annual%20Facilities%20Grant_files/app.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body id="app-layout">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="http://afg.dev/">
+                    AFG
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                                            <li><a href="http://afg.dev/home">Home</a></li>
+                        <li class="dropdown">
+                            <a href="http://afg.dev/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://afg.dev/projects"><i class="fa fa-btn fa-file-text-o"></i>Projects</a></li>
+                                <li><a href="http://afg.dev/projects"><i class="fa fa-btn fa-plus-square-o"></i>New</a></li>
+                            </ul>
+                        </li>
+                                    </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Kieran Fahy <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://afg.dev/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="row">
+        <div class="col-md-5 col-lg-offset-1">
+                        <form action="/chart">
+                <input name="_token" id="token" value="6CylP00b1vKswRdgZ0i4V1IQHNWwr0YED2y5Nsg2" type="hidden">
+                                    <input tabindex="1" name="year[]" id="2013" value="2013" type="checkbox">2013<br>
+                                    <input tabindex="1" name="year[]" id="2014" value="2014" type="checkbox">2014<br>
+                                    <input tabindex="1" name="year[]" id="2015" value="2015" type="checkbox">2015<br>
+                                    <input tabindex="1" name="year[]" id="2016" value="2016" type="checkbox">2016<br>
+                                    <input tabindex="1" name="year[]" id="2017" value="2017" type="checkbox">2017<br>
+                                    <input tabindex="1" name="year[]" id="2018" value="2018" type="checkbox">2018<br>
+                                    <input tabindex="1" name="year[]" id="2019" value="2019" type="checkbox">2019<br>
+                                    <input tabindex="1" name="year[]" id="2020" value="2020" type="checkbox">2020<br>
+                                    <input tabindex="1" name="year[]" id="2021" value="2021" checked="checked" type="checkbox">2021<br>
+                
+                                    <input tabindex="1" name="priority[]" id="Immediate" value="Immediate" type="checkbox">Immediate<br>
+                                    <input tabindex="1" name="priority[]" id="Short Term" value="Short Term" checked="checked" type="checkbox">Short Term<br>
+                                    <input tabindex="1" name="priority[]" id="Long Term" value="Long Term" checked="checked" type="checkbox">Long Term<br>
+                                    <input tabindex="1" name="priority[]" id="Planning" value="Planning" checked="checked" type="checkbox">Planning<br>
+                                    <input tabindex="1" name="priority[]" id="Complete" value="Complete" type="checkbox">Complete<br>
+                
+                <input value="Update" type="submit">
+            </form>
+        </div>
+
+        <div class="col-md-5">
+            <div data-highcharts-chart="0" id="chart" style="height:800px;"><div style="position: relative; overflow: hidden; width: 875px; height: 800px; text-align: left; line-height: normal; z-index: 0; left: 0px; top: 0.766663px;" id="highcharts-0" class="highcharts-container"><svg height="800" width="875" xmlns="http://www.w3.org/2000/svg" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" version="1.1"><desc>Created with Highcharts 4.2.1</desc><defs><clipPath id="highcharts-1"><rect height="732" width="639" y="0" x="0"></rect></clipPath></defs><rect class=" highcharts-background" fill="#FFFFFF" strokeWidth="0" height="800" width="875" y="0" x="0"></rect><g zIndex="1" class="highcharts-grid"></g><g zIndex="1" class="highcharts-grid"><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 132.5 54 L 132.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 205.5 54 L 205.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 278.5 54 L 278.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 352.5 54 L 352.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 425.5 54 L 425.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 498.5 54 L 498.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 571.5 54 L 571.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 644.5 54 L 644.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 718.5 54 L 718.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 791.5 54 L 791.5 693" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#D8D8D8" d="M 865.5 54 L 865.5 693" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 133 267.5 L 123 267.5" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 133 480.5 L 123 480.5" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 133 693.5 L 123 693.5" fill="none"></path><path opacity="1" stroke-width="1" stroke="#C0D0E0" d="M 133 53.5 L 123 53.5" fill="none"></path><path zIndex="7" stroke-width="1" stroke="#C0D0E0" d="M 132.5 54 L 132.5 693" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><text y="735.8666667938232" style="color:#707070;fill:#707070;" class=" highcharts-yaxis-title" transform="translate(0,0)" text-anchor="middle" zIndex="7" x="499">total</text></g><g zIndex="3" class="highcharts-series-group"><g clip-path="url(#highcharts-1)" height="639" width="732" style="" transform="translate(865,693) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" class="highcharts-series highcharts-series-0 highcharts-tracker"><rect ry="0" rx="0" fill="#7cb5ec" stroke-width="1" stroke="#FFFFFF" height="672" width="103" y="60.5" x="480.5"></rect><rect ry="0" rx="0" fill="#7cb5ec" stroke-width="1" stroke="#FFFFFF" height="84" width="103" y="648.5" x="267.5"></rect><rect ry="0" rx="0" fill="#7cb5ec" stroke-width="1" stroke="#FFFFFF" height="45" width="103" y="687.5" x="54.5"></rect></g><g clip-path="none" height="639" width="732" transform="translate(865,693) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" class="highcharts-markers highcharts-series-0"></g></g><text y="24" style="color:#333333;font-size:18px;fill:#333333;width:811px;" zIndex="4" class="highcharts-title" text-anchor="middle" x="438">CATEGORY</text><g style="" opacity="1" transform="translate(133,54) scale(1 1)" visibility="visible" zIndex="6" class="highcharts-data-labels highcharts-series-0 highcharts-tracker"><g transform="translate(672,93)" style="" zIndex="1"><text y="16" style="font-size: 11px; font-weight: bold; color: rgb(0, 0, 0); fill: rgb(0, 0, 0); text-shadow: 0px 0px 6px rgb(255, 255, 255), 0px 0px 3px rgb(255, 255, 255);" zIndex="1" x="5"><tspan>91 752</tspan></text></g><g transform="translate(84,306)" style="" zIndex="1"><text y="16" style="font-size: 11px; font-weight: bold; color: rgb(0, 0, 0); fill: rgb(0, 0, 0); text-shadow: 0px 0px 6px rgb(255, 255, 255), 0px 0px 3px rgb(255, 255, 255);" zIndex="1" x="5"><tspan>11 444</tspan></text></g><g transform="translate(45,519)" style="" zIndex="1"><text y="16" style="font-size: 11px; font-weight: bold; color: rgb(0, 0, 0); fill: rgb(0, 0, 0); text-shadow: 0px 0px 6px rgb(255, 255, 255), 0px 0px 3px rgb(255, 255, 255);" zIndex="1" x="5"><tspan>6 194</tspan></text></g></g><g transform="translate(393,755)" zIndex="7" class="highcharts-legend"><g zIndex="1"><g><g transform="translate(8,3)" zIndex="1" class="highcharts-legend-item"><text y="15" zIndex="2" text-anchor="start" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" x="21">Estimate</text><rect fill="#7cb5ec" zIndex="3" height="12" width="16" y="4" x="0"></rect></g></g></g></g><g zIndex="7" class="highcharts-axis-labels highcharts-xaxis-labels"><text opacity="1" y="163" transform="translate(0,0)" text-anchor="end" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:279px;text-overflow:clip;" x="118"><tspan>Electrical Upgrade</tspan></text><text opacity="1" y="376" transform="translate(0,0)" text-anchor="end" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:279px;text-overflow:clip;" x="118"><tspan>Loss Prevention</tspan></text><text opacity="1" y="589" transform="translate(0,0)" text-anchor="end" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:279px;text-overflow:clip;" x="118"><tspan>Mechanical Upgrade</tspan></text></g><g zIndex="7" class="highcharts-axis-labels highcharts-yaxis-labels"><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="133"><tspan>0k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="206.2"><tspan>10k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="279.4"><tspan>20k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="352.6"><tspan>30k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="425.8"><tspan>40k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="499"><tspan>50k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="572.2"><tspan>60k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="645.4"><tspan>70k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="718.6"><tspan>80k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:73.2;text-overflow:ellipsis;" x="791.8"><tspan>90k</tspan></text><text opacity="1" y="712" transform="translate(0,0)" text-anchor="middle" style="color:#606060;cursor:default;font-size:11px;fill:#606060;width:36.6;text-overflow:ellipsis;" x="851.3583335876465"><tspan>100k</tspan></text></g><g transform="translate(0,-9999)" style="cursor:default;padding:0;pointer-events:none;white-space:nowrap;" zIndex="8" class="highcharts-tooltip"><path transform="translate(1, 1)" stroke-width="5" stroke-opacity="0.049999999999999996" stroke="black" isShadow="true" d="M 3.5 0.5 L 13.5 0.5 C 16.5 0.5 16.5 0.5 16.5 3.5 L 16.5 13.5 C 16.5 16.5 16.5 16.5 13.5 16.5 L 3.5 16.5 C 0.5 16.5 0.5 16.5 0.5 13.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path transform="translate(1, 1)" stroke-width="3" stroke-opacity="0.09999999999999999" stroke="black" isShadow="true" d="M 3.5 0.5 L 13.5 0.5 C 16.5 0.5 16.5 0.5 16.5 3.5 L 16.5 13.5 C 16.5 16.5 16.5 16.5 13.5 16.5 L 3.5 16.5 C 0.5 16.5 0.5 16.5 0.5 13.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path transform="translate(1, 1)" stroke-width="1" stroke-opacity="0.15" stroke="black" isShadow="true" d="M 3.5 0.5 L 13.5 0.5 C 16.5 0.5 16.5 0.5 16.5 3.5 L 16.5 13.5 C 16.5 16.5 16.5 16.5 13.5 16.5 L 3.5 16.5 C 0.5 16.5 0.5 16.5 0.5 13.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="none"></path><path d="M 3.5 0.5 L 13.5 0.5 C 16.5 0.5 16.5 0.5 16.5 3.5 L 16.5 13.5 C 16.5 16.5 16.5 16.5 13.5 16.5 L 3.5 16.5 C 0.5 16.5 0.5 16.5 0.5 13.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" fill="rgba(249, 249, 249, .85)"></path><text y="20" style="font-size:12px;color:#333333;fill:#333333;" zIndex="1" x="8"></text></g><text y="795" style="cursor:pointer;color:#909090;font-size:9px;fill:#909090;" zIndex="8" text-anchor="end" x="865">Highcharts.com</text></svg></div></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#chart').highcharts({"chart":{"type":"bar"},"title":{"text":"CATEGORY"},"xAxis":{"categories":["Electrical Upgrade","Loss Prevention","Mechanical Upgrade"]},"yAxis":{"title":{"text":"total"}},"plotOptions":{"bar":{"dataLabels":{"enabled":"true"}}},"series":[{"name":"Estimate","data":[91752,11444,6194]}]});
+        });
+
+
+//        $(document).ready(function () {
+//
+//            var categories = [];
+//
+//            // Listen for 'change' event, so this triggers when the user clicks on the checkboxes labels
+//            $('input[name="year[]"]').on('change', function (e) {
+//
+//                e.preventDefault();
+//                year = []; // reset
+//
+//                $('input[name="year[]"]:checked').each(function()
+//                {
+//                    year.push($(this).val());
+//                });
+//                token = $('#token').val();
+//                $.ajax({
+//                    'url' : '/chart',
+//                    'data' : {
+//                        y:year,
+//                        _token:token
+//                    },
+//                    'success': function(data) {
+//
+//                        visitorData(data);
+//
+//                    }
+//                });
+//            });
+//            function visitorData (data) {
+//                $('#chart').highcharts(data);
+//            }
+//        });
+    </script>
+
+
+
+
+</body></html>

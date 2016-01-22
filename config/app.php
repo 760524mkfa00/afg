@@ -155,7 +155,7 @@ return [
         AFG\Providers\AuthServiceProvider::class,
         AFG\Providers\EventServiceProvider::class,
         AFG\Providers\RouteServiceProvider::class,
-
+        AFG\Providers\ComposerProvider::class,
     ],
 
     /*
