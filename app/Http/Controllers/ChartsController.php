@@ -78,11 +78,13 @@ class ChartsController extends Controller
         $chart["yAxis"] = array("title" => array("text" => "total"));
         $chart['plotOptions'] = ['bar' => ['dataLabels' => ['enabled' => 'true']]];
 
-        $chart["series"] = [
-            array("name" => "Estimate", "data" => $estimates)
-        ];
+        $chart["series"] = array(
+            array("name" => "Estimate",
+                "data" => array(1,2,3,4,5,6,7,8))
+        );
 
         return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));
 
+//        return \Response::json($chart);
     }
 }
