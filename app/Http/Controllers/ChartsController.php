@@ -77,6 +77,8 @@ class ChartsController extends Controller
             }
         }
 
+        $colours = ['#FF0F00', '#FF6600', '#FF9E01', '#FCD202', '#F8FF01',
+            '#B0DE09', '#04D215', '#0D8ECF', '#0D52D1', '#2A0CD0', '#8A0CCF', '#CD0D74', '#754DEB', '#DDDDDD', '#999999'];
 
         $i = 0;
         foreach($collection as $set)
@@ -85,6 +87,7 @@ class ChartsController extends Controller
             $categories[$i]['name'] = (string)$set['category'];
             $categories[$i]['y'] = (double)$set['subTotal'];
             $categories[$i]['drilldown'] = $set['category'];
+            $categories[$i]['color'] = $colours[$i];
 
             $dd[$i]['name'] = $set['category'];
             $dd[$i]['id'] = $set['category'];
@@ -103,13 +106,19 @@ class ChartsController extends Controller
             $i++;
         }
 
-        $chart["chart"] = array("type" => "column");
+        $chart["chart"] = array("type" => "column", 'borderColor' => '#ddd', 'borderWidth' => 1);
 //        $chart["colors"] = ['linearGradient' => ['x1' => 0, 'x2' => 0, 'y1' => 0, 'y2' => 1], 'stops' => ['0' => '#003399', '1' => '#3366AA']];
-        $chart["title"] = array("text" => "Browse Categories");
+        $chart["title"] = array("text" => "Browse Improvement Areas", 'align' => 'left', 'x' => 30, 'y' => 30, 'margin' => 50);
         $chart["xAxis"] = array("type" => "category");
         $chart["yAxis"] = array("title" => array("text" => "Total Estimated Cost"));
         $chart['legend'] = array('enabled' => false);
-        $chart['plotOptions'] = ['column' => ["borderWidth" => 0,'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "{point.y:.2f}"]]];
+        $chart['plotOptions'] = [
+            'series' => [
+                //"borderColor" => '#303030',
+                'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "{point.y:.2f}"],
+
+                ]
+            ];
         $chart['credits'] = array('enabled' => false);
         $chart['tooltip'] = [
             'headerFormat' => '<span style="font-size:11px">{series.name}</span><br>',
@@ -121,7 +130,13 @@ class ChartsController extends Controller
                 "data" => $categories)
         );
 
-        $chart['drilldown'] = ["series" => $dd];
+        $chart['drilldown'] = [
+            'drillUpButton' => [
+                'relativeTo' => 'spacingBox',
+                'position' => ['x' => -50, 'y' => 0]
+            ],
+            "series" => $dd
+        ];
 
 
         return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));

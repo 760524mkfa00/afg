@@ -20,8 +20,8 @@
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Year</div>
+                        <div class="panel panel-default" id="panel1">
+                            <div class="panel-heading">Year<input type="checkbox" name="checkAll" id="checkAll" class="pull-right"></div>
                             <div class="panel-body">
                                 @foreach($yearBoxes as $checkbox)
                                     <div class="checkbox">
@@ -34,8 +34,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Priority</div>
+                        <div class="panel panel-default" id="panel2">
+                            <div class="panel-heading">Priority<input type="checkbox" name="checkAll" id="checkAll" class="pull-right"></div>
                             <div class="panel-body">
                                 @foreach($priorityBoxes as $checkbox)
                                     <div class="checkbox">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" class="btn btn-primary">
             </form>
         </div>
 
@@ -58,8 +58,35 @@
     </div>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
             $(chart).highcharts({!! json_encode($chart)!!});
+        });
+
+        $("#panel1 #checkAll").click(function () {
+            if ($("#panel1 #checkAll").is(':checked')) {
+                $("#panel1 input[type=checkbox]").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $("#panel1 input[type=checkbox]").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+
+        $("#panel2 #checkAll").click(function () {
+            if ($("#panel2 #checkAll").is(':checked')) {
+                $("#panel2 input[type=checkbox]").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $("#panel2 input[type=checkbox]").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
         });
     </script>
 
