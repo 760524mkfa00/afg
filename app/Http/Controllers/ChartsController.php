@@ -104,6 +104,7 @@ class ChartsController extends Controller
         }
 
         $chart["chart"] = array("type" => "column");
+//        $chart["colors"] = ['linearGradient' => ['x1' => 0, 'x2' => 0, 'y1' => 0, 'y2' => 1], 'stops' => ['0' => '#003399', '1' => '#3366AA']];
         $chart["title"] = array("text" => "Browse Categories");
         $chart["xAxis"] = array("type" => "category");
         $chart["yAxis"] = array("title" => array("text" => "Total Estimated Cost"));

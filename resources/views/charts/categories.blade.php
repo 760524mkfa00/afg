@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="row">
         <div class="col-md-3 col-lg-offset-1">
             @if ( session()->has('message') )
@@ -69,4 +67,5 @@
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 @stop
