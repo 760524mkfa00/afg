@@ -115,7 +115,7 @@ class ChartsController extends Controller
         $chart['plotOptions'] = [
             'series' => [
                 //"borderColor" => '#303030',
-                'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "{point.y:.2f}"],
+                'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "$ {point.y:,.2f}"],
 
                 ]
             ];
