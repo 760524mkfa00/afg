@@ -49,4 +49,21 @@ class ChartsController extends Controller
         }
         return view('charts.categories', compact('chart', 'priorityBoxes', 'yearBoxes' ));
     }
+
+
+    public function yearComparisonChart()
+    {
+        try
+        {
+            $yearBoxes = $this->chartTask->isYearChecked();
+            $priorityBoxes = $this->chartTask->isPriorityChecked();
+            $chart = $this->chartTask->comparisonChart();
+        }
+        catch(DataNotFoundException $e)
+        {
+            return back()->withMessage($e->getMessage());
+        }
+
+        return view('charts.comparison', compact('chart', 'priorityBoxes', 'yearBoxes' ));
+    }
 }
