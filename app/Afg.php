@@ -110,7 +110,7 @@ class Afg extends Model
             ->whereIn('year', $years)
             ->whereIn('priority', $priority)
             ->groupBy('category_id')
-            ->orderBy('category', 'asc')
+            ->orderBy('subTotal', 'asc')
             ->get();
 
         return $query;
@@ -136,7 +136,7 @@ class Afg extends Model
             ->whereIn('year', $years)
             ->whereIn('priority', $priority)
             ->where('estimate', '>', 1)
-            ->orderBy('location', 'asc')
+            ->orderBy('estimate', 'asc')
             ->get();
 
         return $query;

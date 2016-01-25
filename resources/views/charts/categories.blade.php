@@ -26,7 +26,7 @@
                                 @foreach($yearBoxes as $checkbox)
                                     <div class="checkbox">
                                         <label>
-                                            <input tabindex="1" type="checkbox" name="year[]" id="{{$checkbox['year']}}" value="{{$checkbox['year']}}" {{ ($checkbox['yearChecked']) ? 'checked=checked' : '' }}>{{$checkbox['year']}}
+                                            <input tabindex="1" type="checkbox" name="year[]" id="{{$checkbox['line']}}" value="{{$checkbox['line']}}" {{ ($checkbox['lineChecked']) ? 'checked=checked' : '' }}>{{$checkbox['line']}}
                                         </label>
                                     </div>
                                 @endforeach
@@ -40,7 +40,7 @@
                                 @foreach($priorityBoxes as $checkbox)
                                     <div class="checkbox">
                                         <label>
-                                            <input tabindex="1" type="checkbox" name="priority[]" id="{{$checkbox['priority']}}" value="{{$checkbox['priority']}}" {{ ($checkbox['priorityChecked']) ? 'checked=checked' : '' }}>{{$checkbox['priority']}}
+                                            <input tabindex="1" type="checkbox" name="priority[]" id="{{$checkbox['line']}}" value="{{$checkbox['line']}}" {{ ($checkbox['lineChecked']) ? 'checked=checked' : '' }}>{{$checkbox['line']}}
                                         </label>
                                     </div>
                                 @endforeach
