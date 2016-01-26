@@ -6,6 +6,7 @@ use AFG\Afg;
 use AFG\Http\Requests;
 use Illuminate\Http\Request;
 use AFG\Services\Repositories\Afg\AfgRepository;
+use Illuminate\Support\Facades\Input;
 
 class ProjectsController extends Controller
 {
@@ -36,8 +37,14 @@ class ProjectsController extends Controller
 
     public function projectsByYear($year)
     {
-        $data = $this->project->getProjects();
+        $data = $this->project->getProjects(compact('year'));
         return view('projects.projects')
             ->withData($data);
+    }
+
+    public function projectsSearch($q)
+    {
+        $data = $this->project->getProjectsSearch($q);
+        return $data;
     }
 }
