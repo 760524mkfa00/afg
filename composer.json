@@ -21,7 +21,7 @@
             "database"
         ],
         "files": [
-          "app/services/helpers.php"
+          "app/Services/helpers.php"
         ],
         "psr-4": {
             "AFG\\": "app/"
