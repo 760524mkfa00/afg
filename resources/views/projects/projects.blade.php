@@ -21,16 +21,16 @@
                         <tr>
                             <th>Project #</th>
                             <th class="hidden-sm hidden-xs hidden-md">{{ sort_projects_by('region','Region') }}</th>
-                            <th class="hidden-sm hidden-xs">Category</th>
-                            <th class="hidden-sm hidden-xs">Location</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('category','Category') }}</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('location','Location') }}</th>
                             <th>Project Description</th>
-                            <th class="hidden-sm hidden-xs">Client</th>
-                            <th class="hidden-sm hidden-xs">Priority</th>
-                            <th class="hidden-sm hidden-xs">Req Priority</th>
-                            <th class="hidden-sm hidden-xs">Year Started</th>
-                            <th class="hidden-sm hidden-xs">Estimate</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('client','Client') }}</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('priority','Priority') }}</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('priority','Req Priority') }}</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('year','Year Started') }}</th>
+                            <th class="hidden-sm hidden-xs">{{ sort_projects_by('estimate','Estimate') }}</th>
                             <th class="hidden-sm hidden-xs">Actual</th>
-                            <th class="hidden-sm hidden-xs hidden-md">Manager</th>
+                            <th class="hidden-sm hidden-xs hidden-md">{{ sort_projects_by('name','Manager') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                </div>{!! $data->links() !!}
+                </div>{!! $data->appends( Request::only(['sortBy', 'direction']) )->links() !!}
             </div>
         </div>
     </div>

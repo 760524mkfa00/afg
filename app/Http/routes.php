@@ -31,7 +31,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('/projects', 'ProjectsController@projects');
+    Route::get('/projects', ['as' => 'projects','uses' => 'ProjectsController@projects']);
     Route::get('/projects/{year}', ['as' => 'projectsByYear', 'uses' => 'ProjectsController@projectsByYear']);
 
     Route::get('/chart',['as' => 'categories', 'uses' => 'ChartsController@chart']);

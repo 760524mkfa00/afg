@@ -26,31 +26,51 @@ class DbAfgRepository extends DbRepository implements AfgRepository {
     }
 
 
-    public function getProjects()
+    public function getProjects(array $params)
     {
+        if($this->isSortable($params)) {
+            return \DB::table('afgs')
+                ->leftjoin('categories', function ($join) {
+                    $join->on('afgs.category_id', '=', 'categories.id');
+                })
+                ->leftjoin('priorities', function ($join) {
+                    $join->on('afgs.priority_id', '=', 'priorities.id');
+                })
+                ->leftjoin('locations', function ($join) {
+                    $join->on('afgs.location_id', '=', 'locations.id');
+                })
+                ->leftjoin('regions', function ($join) {
+                    $join->on('afgs.region_id', '=', 'regions.id');
+                })
+                ->leftjoin('clients', function ($join) {
+                    $join->on('afgs.client_id', '=', 'clients.id');
+                })
+                ->leftjoin('users', function ($join) {
+                    $join->on('afgs.manager_id', '=', 'users.id');
+                })
+                ->select('category', 'priority', 'location', 'region', 'year', 'name', 'project_number', 'project_description', 'estimate', 'client', 'priority_number')
+                ->orderBy($params['sortBy'], $params['direction'])
+                ->paginate(20);
+
+        }
+
         $query = \DB::table('afgs')
-            ->leftjoin('categories', function($join)
-            {
+            ->leftjoin('categories', function ($join) {
                 $join->on('afgs.category_id', '=', 'categories.id');
             })
-            ->leftjoin('priorities', function($join)
-            {
+            ->leftjoin('priorities', function ($join) {
                 $join->on('afgs.priority_id', '=', 'priorities.id');
             })
-            ->leftjoin('locations', function($join)
-            {
+            ->leftjoin('locations', function ($join) {
                 $join->on('afgs.location_id', '=', 'locations.id');
             })
-            ->leftjoin('regions', function($join)
-            {
+            ->leftjoin('regions', function ($join) {
                 $join->on('afgs.region_id', '=', 'regions.id');
             })
-            ->leftjoin('clients', function($join)
-            {
+            ->leftjoin('clients', function ($join) {
                 $join->on('afgs.client_id', '=', 'clients.id');
             })
-            ->leftjoin('users', function($join)
-            {
+            ->leftjoin('users', function ($join) {
                 $join->on('afgs.manager_id', '=', 'users.id');
             })
             ->select('category', 'priority', 'location', 'region', 'year', 'name', 'project_number', 'project_description', 'estimate', 'client', 'priority_number')
@@ -58,6 +78,11 @@ class DbAfgRepository extends DbRepository implements AfgRepository {
 
         return $query;
 
+    }
+
+    protected function isSortable(array $params)
+    {
+        return $params['sortBy'] and $params['direction'];
     }
 
 }

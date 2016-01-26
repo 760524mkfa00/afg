@@ -12,11 +12,9 @@ class ProjectsController extends Controller
 
     protected $project;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
+
+
     public function __construct(AfgRepository $project)
     {
         $this->middleware('auth');
@@ -25,15 +23,15 @@ class ProjectsController extends Controller
     }
 
 
-    public function projects()
+    public function projects(Request $request)
     {
 
-//        $data = Afg::with(['categories', 'clients', 'locations', 'priorities', 'regions', 'managers'])->paginate(15);
 
-
+        $sortBy = $request->input('sortBy');
+        $direction = $request->input('direction');
 
         return view('projects.projects')
-            ->withData($this->project->getProjects());
+            ->withData($this->project->getProjects(compact('sortBy', 'direction')));
     }
 
     public function projectsByYear($year)

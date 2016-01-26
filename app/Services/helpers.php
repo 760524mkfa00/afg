@@ -2,5 +2,7 @@
 
 function sort_projects_by($column, $body)
 {
-    return route('projects', $body, ['sortBy' => $column]);
+
+    $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
+    return link_to_route('projects', $body, ['sortBy' => $column, 'direction' => $direction]);
 }
