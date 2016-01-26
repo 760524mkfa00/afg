@@ -32,7 +32,7 @@
                                         <div class="col-md-12" style="border: solid 1px #ddd; margin-bottom: 20px; min-height:200px; position: relative;">
                                             <div class="row">
                                                 <div class="col-md-12" style="border-bottom: solid 1px #cccccc; padding:10px; background-color: #ddd;text-align: center; font-weight: bold;">
-                                                    <th>{!! $key !!}</th>
+                                                    <th><a href="{{ route('projectsByYear', $key) }}">{{ $key }}</a></th>
                                                 </div>
                                             </div>
                                             <div class="row" style="padding-top: 5px;">

@@ -29,6 +29,11 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        div.tooltip-inner {
+            max-width: 450px;
+           font-size: 1.5em;
+        }
     </style>
 </head>
 <body id="app-layout">

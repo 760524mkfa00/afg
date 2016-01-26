@@ -71,6 +71,12 @@ class Afg extends Model
         return $this->hasMany(Tracking::class);
     }
 
+    public function scopeYear($query, $year)
+    {
+        return $query->where('year', $year);
+    }
+
+
     public static function groupYear()
     {
 
