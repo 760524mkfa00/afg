@@ -27,24 +27,18 @@ class ProjectsController extends Controller
     public function projects(Request $request)
     {
 
-
         $sortBy = $request->input('sortBy');
         $direction = $request->input('direction');
+        $str = $request->input('str');
+        $year = $request->input('year');
 
         return view('projects.projects')
-            ->withData($this->project->getProjects(compact('sortBy', 'direction')));
+            ->withData($this->project->getProjects(compact('sortBy', 'direction', 'str', 'year')));
     }
 
     public function projectsByYear($year)
     {
-        $data = $this->project->getProjects(compact('year'));
-        return view('projects.projects')
-            ->withData($data);
+        //
     }
 
-    public function projectsSearch($q)
-    {
-        $data = $this->project->getProjectsSearch($q);
-        return $data;
-    }
 }

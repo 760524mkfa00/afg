@@ -11,5 +11,4 @@ interface AfgRepository {
     public function update($id, $data);
     public function remove($id);
     public function getProjects(array $params);
-    public function getProjectsSearch($q);
 }

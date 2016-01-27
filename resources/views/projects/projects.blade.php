@@ -15,10 +15,13 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Projects...
-                        <form id="lets_search" action="" class="pull-right" style="margin-top: -6px;">
+                        <form id="lets_search" action="{{ route('projects') }}" class="pull-right" style="margin-top: -6px;">
                             <div class="input-group">
+                                <input type="hidden" name="sortBy" value="{{ app('request')->input('sortBy') }}">
+                                <input type="hidden" name="direction" value="{{ app('request')->input('direction') }}">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
-                                <input type="text" name="str" class="form-control" id="str" aria-describedby="basic-addon1"">
+                                <input type="text" name="str" class="form-control" id="str" aria-describedby="basic-addon1">
+                                <input type="hidden" name="year" value="{{ app('request')->input('year') }}">
                             </div>
                             {{--<input type="submit" value="send" name="send" id="send">--}}
                         </form>
@@ -62,7 +65,7 @@
                             </div>
                         </tbody>
                     </table>
-                </div>{!! $data->appends( Request::only(['sortBy', 'direction']) )->links() !!}
+                </div>{!! $data->appends( Request::only(['sortBy', 'direction', 'str', 'year']) )->links() !!}
             </div>
         </div>
     </div>
@@ -73,16 +76,6 @@
                 'selector': '',
                 'placement': 'top',
                 'container':'body'
-            });
-        });
-
-        $('#str').change(function(e) {
-            $.ajax({
-                url: "projects/" + this.value,
-                type: "GET",
-                success: function(data) {
-                    $('#projectData').empty();
-                }
             });
         });
 
