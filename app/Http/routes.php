@@ -30,15 +30,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
-
     Route::get('/projects', ['as' => 'projects','uses' => 'ProjectsController@projects']);
-    Route::get('/projects/{year}', ['as' => 'projectsByYear', 'uses' => 'ProjectsController@projectsByYear']);
 
     Route::get('/chart',['as' => 'categories', 'uses' => 'ChartsController@chart']);
     Route::get('/chart/comparison',['as' => 'comparison', 'uses' => 'ChartsController@yearComparisonChart']);
-
-
-
-
 
 });
