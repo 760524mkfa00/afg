@@ -71,45 +71,20 @@ class chartsCategoriesTask
 
     protected function schoolData()
     {
-        $selectedYears = $this->selectedYears();
-        $selectedPriorities = $this->selectedPriorities();
-
-        $drilldown = Afg::categoriesDrilldown($selectedYears, $selectedPriorities);
-
-        foreach($drilldown as $sets => $values)
-        {
-            foreach($values as $key => $value) {
-
-                $schools[$sets][$key] = $value;
-            }
-        }
-
-        return $schools;
-
+        return json_decode(json_encode(Afg::categoriesDrilldown($this->selectedYears(), $this->selectedPriorities())), true);
     }
 
     protected function categoryData()
     {
 
-        $selectedYears = $this->selectedYears();
-        $selectedPriorities = $this->selectedPriorities();
-
-        $data = Afg::categoriesChart($selectedYears, $selectedPriorities);
+        $data = json_decode(json_encode(Afg::categoriesChart($this->selectedYears(), $this->selectedPriorities())), true);
 
         if(count($data) < 1)
         {
             throw new DataNotFoundException('The options you selected provided no results.');
         }
 
-        foreach($data as $sets => $values)
-        {
-            foreach($values as $key => $value) {
-
-                $collection[$sets][$key] = $value;
-            }
-        }
-
-        return $collection;
+        return $data;
     }
 
 
