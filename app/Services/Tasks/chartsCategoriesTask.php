@@ -7,27 +7,49 @@ use AFG\Priority;
 use Illuminate\Http\Request;
 use AFG\Services\Exceptions\DataNotFoundException;
 
+/**
+ * Class chartsCategoriesTask
+ * @package AFG\Services\Tasks
+ */
 class chartsCategoriesTask
 {
 
+    /**
+     * Store the request data
+     * @var Request
+     */
     protected $request;
 
+    /**
+     * Store main series for chart
+     * @var
+     */
     protected $categories;
 
+    /**
+     * Store the drill down information
+     * @var
+     */
     protected $drillDown;
 
+    /**
+     * Inject the post request
+     * chartsCategoriesTask constructor.
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
+    /**
+     * Builds up the chart layout title and settings
+     * @return mixed
+     */
     public function categoriesChart()
     {
-
+        // Call the data set for the series and drill down
         $this->buildDataSet();
-
-        $categories = $this->categories;
-        $dd = $this->drillDown;
 
         $chart["chart"] = array("type" => "column", 'borderColor' => '#ddd', 'borderWidth' => 1);
         $chart["title"] = array("text" => "Browse Improvement Areas", 'align' => 'left', 'x' => 30, 'y' => 30, 'margin' => 50);
@@ -49,7 +71,7 @@ class chartsCategoriesTask
         $chart["series"] = array(
             array("name" => "Categories",
                 "colourByPoint" => true,
-                "data" => $categories)
+                "data" => $this->categories)
         );
 
         $chart['drilldown'] = [
@@ -57,23 +79,37 @@ class chartsCategoriesTask
                 'relativeTo' => 'spacingBox',
                 'position' => ['x' => -50, 'y' => 0]
             ],
-            "series" => $dd
+            "series" => $this->drillDown
         ];
 
         return $chart;
     }
 
+    /**
+     * An array of colours for the chart bars
+     * @return array
+     */
     protected function colours()
     {
         return ['#FF0F00', '#FF6600', '#FF9E01', '#FCD202', '#F8FF01',
         '#B0DE09', '#04D215', '#0D8ECF', '#0D52D1', '#2A0CD0', '#8A0CCF', '#CD0D74', '#754DEB', '#DDDDDD', '#999999'];
     }
 
+    /**
+     * get the drill down data and convert it to an array
+     * @return mixed
+     */
     protected function schoolData()
     {
         return json_decode(json_encode(Afg::categoriesDrilldown($this->selectedYears(), $this->selectedPriorities())), true);
     }
 
+    /**
+     * get the category data, convert it to an array
+     * check it has data and throw an exception if it does not
+     * @return mixed
+     * @throws DataNotFoundException
+     */
     protected function categoryData()
     {
 
@@ -88,6 +124,10 @@ class chartsCategoriesTask
     }
 
 
+    /**
+     * takes the data and organises it to an array set for the chart categories and drill downs can reproduce in chart format
+     * @throws DataNotFoundException
+     */
     protected function buildDataSet()
     {
 
@@ -124,6 +164,12 @@ class chartsCategoriesTask
     }
 
 
+    /**
+     * check if an option was checked and pass that back to the checkboxes so the user can see what options they selected.
+     * @param $data
+     * @param $selected
+     * @return mixed
+     */
     protected function isChecked($data, $selected)
     {
         foreach($data as $line)
@@ -142,32 +188,56 @@ class chartsCategoriesTask
         return $lineBoxes;
     }
 
+    /**
+     * Get a list of years currently used from the afg table
+     * @return mixed
+     */
     protected function years()
     {
         return Afg::groupBy('year')->lists('year');
     }
 
+    /**
+     * get the list of priorities
+     * @return mixed
+     */
     protected function priorities()
     {
         return Priority::groupBy('priority')->lists('priority');
     }
 
 
+    /**
+     * get the years that were checked
+     * @return mixed
+     */
     protected function selectedYears()
     {
         return $this->request->get('year') ?  $this->request->get('year') : $this->years();
     }
 
+    /**
+     * get the selected priorities
+     * @return mixed
+     */
     protected function selectedPriorities()
     {
         return $this->request->get('priority') ?  $this->request->get('priority') : $this->priorities();
     }
 
+    /**
+     * check if a year is checked
+     * @return mixed
+     */
     public function isYearChecked()
     {
         return $this->isChecked($this->years(), $this->selectedYears());
     }
 
+    /**
+     * check if a priority is checked
+     * @return mixed
+     */
     public function isPriorityChecked()
     {
         return $this->isChecked($this->priorities(), $this->selectedPriorities());
