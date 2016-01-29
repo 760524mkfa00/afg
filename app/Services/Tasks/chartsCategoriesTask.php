@@ -4,6 +4,7 @@ namespace AFG\Services\Tasks;
 
 use AFG\Afg;
 use AFG\Priority;
+use AFG\Category;
 use Illuminate\Http\Request;
 use AFG\Services\Exceptions\DataNotFoundException;
 
@@ -123,6 +124,25 @@ class chartsCategoriesTask
         return $data;
     }
 
+    /**
+     * get the category data, convert it to an array
+     * check it has data and throw an exception if it does not
+     * @return mixed
+     * @throws DataNotFoundException
+     */
+    protected function categoryYearData()
+    {
+
+        $data = json_decode(json_encode(Afg::categoriesByYearChart($this->selectedYears(), $this->selectedPriorities())), true);
+
+        if(count($data) < 1)
+        {
+            throw new DataNotFoundException('The options you selected provided no results.');
+        }
+
+        return $data;
+    }
+
 
     /**
      * takes the data and organises it to an array set for the chart categories and drill downs can reproduce in chart format
@@ -206,6 +226,15 @@ class chartsCategoriesTask
         return Priority::groupBy('priority')->lists('priority');
     }
 
+    /**
+     * get the list of priorities
+     * @return mixed
+     */
+    protected function categories()
+    {
+        return Category::groupBy('category')->orderBy('category')->lists('category');
+    }
+
 
     /**
      * get the years that were checked
@@ -241,5 +270,92 @@ class chartsCategoriesTask
     public function isPriorityChecked()
     {
         return $this->isChecked($this->priorities(), $this->selectedPriorities());
+    }
+
+
+    /**
+     * Builds up the chart layout title and settings
+     * @return mixed
+     */
+    public function categoriesByYearChart()
+    {
+        // Call the data set for the series and drill down
+        $this->buildYearDataSet();
+
+        $chart["chart"] = array("type" => "column", 'borderColor' => '#ddd', 'borderWidth' => 1);
+        $chart["title"] = array("text" => "Browse Categories By Year", 'align' => 'left', 'x' => 30, 'y' => 30, 'margin' => 50);
+        $chart["xAxis"] = [
+            "categories" => $this->categories(),
+            "crosshair" => true
+        ];
+        $chart["yAxis"] = [
+            'min' => 0,
+            "title" => [
+                "text" => "Total Estimated Cost",
+                'align' => 'high'
+            ],
+            'labels' => [
+                'overflow' => 'justify'
+            ]
+        ];
+        $chart['legend'] = array('enabled' => true);
+        $chart['plotOptions'] = [
+            'bar' => [
+                //"borderColor" => '#303030',
+                'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "$ {point.y:,.2f}"],
+
+            ]
+        ];
+        $chart['credits'] = array('enabled' => false);
+        $chart['tooltip'] = [
+            'headerFormat' => '<span style="font-size:11px">{series.name}</span><br>',
+            'pointFormat' => '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b> of total<br/>'
+        ];
+        $chart["series"] = $this->categories;
+
+        return $chart;
+    }
+
+    /**
+     * takes the data and organises it to an array set for the chart categories and drill downs can reproduce in chart format
+     * @throws DataNotFoundException
+     */
+    protected function buildYearDataSet()
+    {
+
+        $categories = $this->categories();
+        $collections = $this->categoryYearData();
+        $years = $this->selectedYears();
+
+        foreach($collections as $collection)
+        {
+                $cat[$collection['year']]['data'][$collection['category']] = $collection['subTotal'];
+        }
+
+        $i = 0;
+        foreach($cat as $key => $value)
+        {
+//            dd($value);
+            $data[$i]['name'] = (string)$key;
+            foreach($value as $key => $category)
+            {
+
+                for($i = 0; $i < count($this->categories()); $i++ )
+                {
+
+                    foreach ($category as $keys => $cats)
+                    {
+                        $data[$i]['data'][] = $cats;
+                        //                $data[$i]['data'][] = array_intersect($this->categories(), $keys);
+                    }
+                }
+            }
+            $i++;
+        }
+
+
+        dd($data);
+        $this->categories = $data;
+
     }
 }

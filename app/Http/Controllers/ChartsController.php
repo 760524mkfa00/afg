@@ -2,6 +2,7 @@
 
 namespace AFG\Http\Controllers;
 
+use AFG\Afg;
 use Illuminate\Http\Request;
 use AFG\Services\Tasks\chartsCategoriesTask;
 use AFG\Http\Requests\chartsCategoriesRequest;
@@ -51,19 +52,20 @@ class ChartsController extends Controller
     }
 
 
-    public function yearComparisonChart()
+    public function yearComparisonChart(chartsCategoriesRequest $request)
     {
+
         try
         {
             $yearBoxes = $this->chartTask->isYearChecked();
             $priorityBoxes = $this->chartTask->isPriorityChecked();
-            $chart = $this->chartTask->comparisonChart();
+            $chart = $this->chartTask->categoriesByYearChart();
         }
         catch(DataNotFoundException $e)
         {
             return back()->withMessage($e->getMessage());
         }
 
-        return view('charts.comparison', compact('chart', 'priorityBoxes', 'yearBoxes' ));
+        return view('charts.categoriesByYear', compact('chart', 'priorityBoxes', 'yearBoxes' ));
     }
 }

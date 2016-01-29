@@ -16,7 +16,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('categories') }}" class="form-group">
+            <form action="{{ route('comparison') }}" class="form-group">
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-6">
