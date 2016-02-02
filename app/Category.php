@@ -24,4 +24,9 @@ class Category extends Model
         return $this->hasMany(Afg::class);
     }
 
+    public function listCategories()
+    {
+        return array('' => ' ') + Category::lists('category','id')->toArray();
+    }
+
 }

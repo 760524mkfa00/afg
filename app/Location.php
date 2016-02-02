@@ -22,4 +22,9 @@ class Location extends Model
     {
         return $this->hasMany(Afg::class);
     }
+
+    public function listLocations()
+    {
+        return array('' => ' ') + Location::lists('location','id')->toArray();
+    }
 }

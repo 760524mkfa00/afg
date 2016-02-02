@@ -5,6 +5,7 @@ namespace AFG\Http\Controllers;
 use AFG\Afg;
 use AFG\Http\Requests;
 use Illuminate\Http\Request;
+use AFG\Http\Requests\ProjectRequest;
 use AFG\Services\Repositories\Afg\AfgRepository;
 use Illuminate\Support\Facades\Input;
 
@@ -36,9 +37,15 @@ class ProjectsController extends Controller
             ->withData($this->project->getProjects(compact('sortBy', 'direction', 'str', 'year')));
     }
 
-    public function projectsByYear($year)
+
+    public function create()
     {
-        //
+        return view('projects.create');
+    }
+
+    public function store(ProjectRequest $request)
+    {
+        Afg::create($request->all());
     }
 
 }

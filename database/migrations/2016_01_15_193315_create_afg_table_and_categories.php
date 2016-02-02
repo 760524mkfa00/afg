@@ -52,7 +52,7 @@ class CreateAfgTableAndCategories extends Migration
             $table->integer('client_id')->unsigned();
             $table->string('priority_number',2);
             $table->integer('priority_id')->unsigned();
-            $table->string('year',4);
+            $table->string('year',4)->nullable();
             $table->double('estimate', 12, 2);
             $table->integer('manager_id')->unsigned()->nullable();
             $table->timestamps();

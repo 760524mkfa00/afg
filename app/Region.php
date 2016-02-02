@@ -22,4 +22,9 @@ class Region extends Model
     {
         return $this->hasMany(Afg::class);
     }
+
+    public function listRegions()
+    {
+        return array('' => ' ') + Region::lists('region','id')->toArray();
+    }
 }

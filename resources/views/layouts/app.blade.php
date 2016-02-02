@@ -67,7 +67,7 @@
                             <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/projects') }}"><i class="fa fa-btn fa-file-text-o"></i>Projects</a></li>
-                                <li><a href="{{ url('/projects') }}"><i class="fa fa-btn fa-plus-square-o"></i>New</a></li>
+                                <li><a href="{{ url('/projects/create') }}"><i class="fa fa-btn fa-plus-square-o"></i>New</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

@@ -25,6 +25,6 @@ class Priority extends Model
 
     public function listPriorities()
     {
-        return Priority::lists('priority','id')->toArray();
+        return array('' => ' ') + Priority::lists('priority','id')->toArray();
     }
 }

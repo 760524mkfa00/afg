@@ -22,4 +22,9 @@ class Client extends Model
     {
         return $this->hasMany(Afg::class);
     }
+
+    public function listClients()
+    {
+        return array('' => ' ') + Client::lists('client','id')->toArray();
+    }
 }

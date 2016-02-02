@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return ($user == \Auth::id());
     }
+
+    public function listManagers()
+    {
+        return array('' => ' ') + User::lists('name','id')->toArray();
+    }
 }
