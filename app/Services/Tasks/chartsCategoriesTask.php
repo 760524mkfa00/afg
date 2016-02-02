@@ -93,7 +93,7 @@ class chartsCategoriesTask
     protected function colours()
     {
         return ['#FF0F00', '#FF6600', '#FF9E01', '#FCD202', '#F8FF01',
-        '#B0DE09', '#04D215', '#0D8ECF', '#0D52D1', '#2A0CD0', '#8A0CCF', '#CD0D74', '#754DEB', '#DDDDDD', '#999999'];
+            '#B0DE09', '#04D215', '#0D8ECF', '#0D52D1', '#2A0CD0', '#8A0CCF', '#CD0D74', '#754DEB', '#DDDDDD', '#999999'];
     }
 
     /**
@@ -116,8 +116,7 @@ class chartsCategoriesTask
 
         $data = json_decode(json_encode(Afg::categoriesChart($this->selectedYears(), $this->selectedPriorities())), true);
 
-        if(count($data) < 1)
-        {
+        if (count($data) < 1) {
             throw new DataNotFoundException('The options you selected provided no results.');
         }
 
@@ -135,8 +134,7 @@ class chartsCategoriesTask
 
         $data = json_decode(json_encode(Afg::categoriesByYearChart($this->selectedYears(), $this->selectedPriorities())), true);
 
-        if(count($data) < 1)
-        {
+        if (count($data) < 1) {
             throw new DataNotFoundException('The options you selected provided no results.');
         }
 
@@ -157,8 +155,7 @@ class chartsCategoriesTask
 
 
         $i = 0;
-        foreach($collection as $set)
-        {
+        foreach ($collection as $set) {
             $categories[$i]['name'] = (string)$set['category'];
             $categories[$i]['y'] = (double)$set['subTotal'];
             $categories[$i]['drilldown'] = $set['category'];
@@ -168,19 +165,17 @@ class chartsCategoriesTask
             $dd[$i]['id'] = $set['category'];
             $dd[$i]['data'] = [];
 
-            foreach($schools as $value)
-            {
-                if($value['category'] == $dd[$i]['name'])
-                {
-                    $dd[$i]['data'][] = [$value['location'] , (float)$value['estimate']];
+            foreach ($schools as $value) {
+                if ($value['category'] == $dd[$i]['name']) {
+                    $dd[$i]['data'][] = [$value['location'], (float)$value['estimate']];
                 }
             }
 
             $i++;
         }
 
-            $this->categories = $categories;
-            $this->drillDown = $dd;
+        $this->categories = $categories;
+        $this->drillDown = $dd;
     }
 
 
@@ -192,14 +187,11 @@ class chartsCategoriesTask
      */
     protected function isChecked($data, $selected)
     {
-        foreach($data as $line)
-        {
+        foreach ($data as $line) {
             $lineBoxes[$line]['line'] = $line;
             $lineBoxes[$line]['lineChecked'] = false;
-            foreach($selected as $select)
-            {
-                if($select == $line)
-                {
+            foreach ($selected as $select) {
+                if ($select == $line) {
                     $lineBoxes[$line]['lineChecked'] = true;
                 }
             }
@@ -233,8 +225,19 @@ class chartsCategoriesTask
     protected function categories()
     {
         return Category::groupBy('category')->orderBy('category')->lists('category');
+
     }
 
+    /**
+     * get the list of priorities
+     * @return mixed
+     */
+    protected function categoriesWithID()
+    {
+        $me = Category::groupBy('category')->orderBy('category')->lists('ID', 'category');
+
+        return $me->toArray();
+    }
 
     /**
      * get the years that were checked
@@ -242,7 +245,7 @@ class chartsCategoriesTask
      */
     protected function selectedYears()
     {
-        return $this->request->get('year') ?  $this->request->get('year') : $this->years();
+        return $this->request->get('year') ? $this->request->get('year') : $this->years();
     }
 
     /**
@@ -251,7 +254,7 @@ class chartsCategoriesTask
      */
     protected function selectedPriorities()
     {
-        return $this->request->get('priority') ?  $this->request->get('priority') : $this->priorities();
+        return $this->request->get('priority') ? $this->request->get('priority') : $this->priorities();
     }
 
     /**
@@ -300,17 +303,17 @@ class chartsCategoriesTask
         ];
         $chart['legend'] = array('enabled' => true);
         $chart['plotOptions'] = [
-            'bar' => [
-                //"borderColor" => '#303030',
+            'series' => [
+                'minPointLength' => '2',
                 'dataLabels' => ['overflow' => 'none', 'crop' => 'false', 'enabled' => 'true', "format" => "$ {point.y:,.2f}"],
 
             ]
         ];
         $chart['credits'] = array('enabled' => false);
-        $chart['tooltip'] = [
-            'headerFormat' => '<span style="font-size:11px">{series.name}</span><br>',
-            'pointFormat' => '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b> of total<br/>'
-        ];
+//        $chart['tooltip'] = [
+//            'headerFormat' => '<span style="font-size:11px">{series.name}</span><br>',
+//            'pointFormat' => '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b> of total<br/>'
+//        ];
         $chart["series"] = $this->categories;
 
         return $chart;
@@ -323,38 +326,40 @@ class chartsCategoriesTask
     protected function buildYearDataSet()
     {
 
-        $categories = $this->categories();
+        $categories = $this->categoriesWithID();
         $collections = $this->categoryYearData();
         $years = $this->selectedYears();
 
-        foreach($collections as $collection)
-        {
-                $cat[$collection['year']]['data'][$collection['category']] = $collection['subTotal'];
+        foreach ($collections as $collection) {
+            $cat[$collection['year']]['data'][$collection['category']] = $collection['subTotal'];
         }
 
         $i = 0;
-        foreach($cat as $key => $value)
-        {
-//            dd($value);
-            $data[$i]['name'] = (string)$key;
-            foreach($value as $key => $category)
-            {
+        foreach ($cat as $keyys => $value) {
+            $data[$i]['name'] = (string)$keyys;
+            foreach ($value as $category) {
+                $a = $categories;
+                $b = $category;
+                $d = array($a, $b);
 
-                for($i = 0; $i < count($this->categories()); $i++ )
-                {
-
-                    foreach ($category as $keys => $cats)
-                    {
-                        $data[$i]['data'][] = $cats;
-                        //                $data[$i]['data'][] = array_intersect($this->categories(), $keys);
-                    }
+                $keys = array();
+                foreach(new \RecursiveIteratorIterator(new \RecursiveArrayIterator($d)) as $key => $val) $keys[$key] = '';
+                $merged = array();
+                foreach($d as $values) {
+                    $merged[] = array_merge($keys, $values);
                 }
+
+                foreach($merged['1'] as $kieran)
+                {
+                    $data[$i]['data'][] = (int)$kieran;
+                }
+
+
             }
             $i++;
         }
 
-
-        dd($data);
+//        dd($data);
         $this->categories = $data;
 
     }

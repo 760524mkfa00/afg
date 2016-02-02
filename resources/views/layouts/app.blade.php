@@ -73,7 +73,8 @@
                         <li class="dropdown">
                             <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Charts<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/chart') }}"><i class="fa fa-btn fa-file-text-o"></i>Categories</a></li>
+                                <li><a href="{{ url('/chart') }}"><i class="fa fa-btn fa-file-text-o"></i>Categories Drill Down</a></li>
+                                <li><a href="{{ url('/chart/comparison') }}"><i class="fa fa-btn fa-file-text-o"></i>Categories Yearly Comparison</a></li>
                             </ul>
                         </li>
                     @endif
