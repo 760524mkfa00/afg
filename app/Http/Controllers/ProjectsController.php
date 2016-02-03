@@ -46,6 +46,23 @@ class ProjectsController extends Controller
     public function store(ProjectRequest $request)
     {
         Afg::create($request->all());
+
+        return \Redirect::route('projects')->withMessage('Project Added');
     }
+
+    public function edit($id)
+    {
+        $data = Afg::findOrNew($id);
+        return view('projects.edit')
+            ->withData($data);
+    }
+
+    public function update($id, ProjectRequest $request)
+    {
+        Afg::find($id)->update($request->all());
+
+        return \Redirect::route('projects')->withMessage('Project Updated');
+    }
+
 
 }

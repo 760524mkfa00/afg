@@ -42,6 +42,7 @@
                             <th class="hidden-sm hidden-xs">{{ sort_projects_by('estimate','Estimate') }}</th>
                             <th class="hidden-sm hidden-xs">Actual</th>
                             <th class="hidden-sm hidden-xs hidden-md">{{ sort_projects_by('name','Manager') }}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -60,6 +61,7 @@
                                     <td class="hidden-sm hidden-xs">{{ number_format($project->estimate,2,'.',',') }}</td>
                                     <td class="hidden-sm hidden-xs">Actual Value</td>
                                     <td class="hidden-sm hidden-xs hidden-md">{{ @$project->name }}</td>
+                                    <td><a href="{{ route('projects.edit', $project->ID) }}"><i class="fa fa-pencil"></i></a></td>
                                 </tr>
                                 @endforeach
                             </div>
@@ -77,6 +79,12 @@
                 'placement': 'top',
                 'container':'body'
             });
+
+            setTimeout(function(){
+                $('.alert').fadeTo("slow", 0.1, function(){
+                    $('.alert').alert('close')
+                });
+            }, 3000)
         });
 
     </script>

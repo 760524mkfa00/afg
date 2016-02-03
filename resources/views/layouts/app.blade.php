@@ -101,7 +101,7 @@
             </div>
         </div>
     </nav>
-
+    @include ('_partials.flashMessage')
     @yield('content')
 
 

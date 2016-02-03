@@ -33,6 +33,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/projects', ['as' => 'projects','uses' => 'ProjectsController@projects']);
     Route::get('/projects/create', 'ProjectsController@create');
     Route::post('/projects', 'ProjectsController@store');
+    Route::get('/projects/{id}/edit', ['as' => 'projects.edit','uses' => 'ProjectsController@edit']);
+    Route::post('/projects/{id}', ['as' => 'projects.update','uses' => 'ProjectsController@update']);
 
     Route::get('/chart',['as' => 'categories', 'uses' => 'ChartsController@chart']);
     Route::get('/chart/comparison',['as' => 'comparison', 'uses' => 'ChartsController@yearComparisonChart']);

@@ -23,11 +23,11 @@ class ComposerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\PriorityComposer');
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\CategoryComposer');
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\ClientComposer');
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\LocationComposer');
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\ManagerComposer');
-        $this->app->make('view')->composer(['projects.create'], 'AFG\Composers\RegionComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\PriorityComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\CategoryComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\ClientComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\LocationComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\ManagerComposer');
+        $this->app->make('view')->composer(['projects.create', 'projects.edit'], 'AFG\Composers\RegionComposer');
     }
 }

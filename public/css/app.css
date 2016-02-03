@@ -5765,4 +5765,18 @@ body {
 .panel-heading a.collapsed:after {
   content: "\e080"; }
 
+.flash_message {
+  background: none repeat scroll 0 0 #193654;
+  border: medium none;
+  border-radius: 0;
+  bottom: 0;
+  box-shadow: 0 0 15px #999;
+  color: #fff;
+  min-width: 380px;
+  padding: 18px 40px;
+  position: fixed;
+  right: 20px;
+  text-align: center;
+  z-index: 10000; }
+
 /*# sourceMappingURL=app.css.map */

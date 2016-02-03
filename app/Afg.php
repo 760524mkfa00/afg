@@ -172,4 +172,9 @@ class Afg extends Model
 //dd($query);
         return $query;
     }
+
+    public function setProjectNumberAttribute($value)
+    {
+        $this->attributes['project_number'] = $value ?: NULL;
+    }
 }
