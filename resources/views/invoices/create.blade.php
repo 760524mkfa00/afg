@@ -16,7 +16,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Invoice...</div>
                     <div class="panel-body">
-                        {!! Form::open(array('url' => '/tracking/invoice', 'method' => 'post')) !!}
+                        {!! Form::open(array('url' => '/invoices', 'method' => 'post')) !!}
                         @include('invoices.form', ['submitButtonText' => 'Add Invoice'])
                         {!! Form::close() !!}
                     </div>

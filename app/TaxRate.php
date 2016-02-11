@@ -4,8 +4,10 @@ namespace AFG;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TaxRates extends Model
+class TaxRate extends Model
 {
+
+    protected $table = "taxrates";
     /**
      * The attributes that are mass assignable.
      *

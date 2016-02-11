@@ -49,6 +49,7 @@ class TrackingController extends Controller
     {
         $data = Tracking::with('invoices')->find($id);
 
+
         return view('invoices.invoice')
             ->withData($data);
     }

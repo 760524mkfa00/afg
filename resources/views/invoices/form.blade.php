@@ -16,8 +16,10 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('holdback', 'Hold Back (will be a check box):') !!}
-    {!! Form::text('holdback', NULL, array('class' => 'form-control')) !!}
+
+    {!! Form::label('holdback', '10% Hold Back:') !!}
+    <br/>
+    {!! Form::checkbox('holdback', NULL, array('class' => 'form-control')) !!}
 </div>
 
 <div class="form-group">
@@ -26,8 +28,8 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('taxRate_id', 'Tax Rate(will be a drop down):') !!}
-    {!! Form::text('taxRate_id', NULL, array('class' => 'form-control')) !!}
+    {!! Form::label('taxRate_id', 'Tax Rate:') !!}
+    {!! Form::select('taxRate_id', $tax, NULL, array('class' => 'form-control')) !!}
 </div>
 
 <div class="form-group">
