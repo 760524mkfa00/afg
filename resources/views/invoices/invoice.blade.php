@@ -54,20 +54,22 @@
                                 <th>Fees</th>
                                 <th>Hold Back</th>
                                 <th>Disbursements</th>
+                                <th>Sub Total</th>
                                 <th>Tax Rate</th>
                                 <th>Total</th>
                             </thead>
                             <tbody>
                             @foreach($data->invoices as $invoice)
                                 <tr>
-                                    <td><a href="#"><i class="fa fa-pencil-square-o"></i></a></td>
+                                    <td><a href="{{ route('invoice.edit', [$invoice->id, $data->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td>{{ $invoice->scope }}</td>
                                     <td>{{ $invoice->invoice }}</td>
-                                    <td>{{ $invoice->fees }}</td>
-                                    <td>{{ $invoice->holdback }}</td>
-                                    <td>{{ $invoice->disbursements }}</td>
-                                    <td>{{ $invoice->taxRate_id }}</td>
-                                    <td>Some Calculated Value</td>
+                                    <td>{{ number_format($invoice->fees,2) }}</td>
+                                    <td>{{ number_format(($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0,2) }}</td>
+                                    <td>{{ number_format($invoice->disbursements,2) }}</td>
+                                    <td>{{ number_format($invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0),2) }}</td>
+                                    <td>{{ $invoice->taxRates->rate }}</td>
+                                    <td>{{ number_format(( $invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0)) * $invoice->taxRates->rate, 2)}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

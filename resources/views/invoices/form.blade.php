@@ -19,7 +19,7 @@
 
     {!! Form::label('holdback', '10% Hold Back:') !!}
     <br/>
-    {!! Form::checkbox('holdback', NULL, array('class' => 'form-control')) !!}
+    {!! Form::checkbox('holdback', NULL, NULL, array('class' => '')) !!}
 </div>
 
 <div class="form-group">

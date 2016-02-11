@@ -34,4 +34,23 @@ class InvoiceController extends Controller
 
         return \Redirect::route('tracking.invoices', $tracking_id)->withMessage('Invoice Added');
     }
+
+    public function edit($id, $team)
+    {
+        $data = Invoice::findOrNew($id);
+        $tax = TaxRate::lists('rate', 'id');
+        return view('invoices.edit')
+            ->withData($data)
+            ->withTeam($team)
+            ->withTax($tax);
+    }
+
+//    public function update($id, Request $request)
+//    {
+//        $project_id = $request->get('afg_id');
+//
+//        Tracking::find($id)->update($request->all());
+//
+//        return \Redirect::route('projects.balances', $project_id)->withMessage('Contractor Updated');
+//    }
 }

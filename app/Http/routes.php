@@ -48,4 +48,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/tracking/invoices/{id}', ['as' => 'tracking.invoices', 'uses' => 'TrackingController@invoices']);
     Route::get('/tracking/invoices/create/{team}', ['as' => 'invoice.create','uses' => 'InvoiceController@create']);
     Route::post('/invoices', 'InvoiceController@store');
+    Route::get('/invoices/{id}/edit/{team}', ['as' => 'invoice.edit','uses' => 'InvoiceController@edit']);
+    Route::post('/invoices/{id}', ['as' => 'invoice.update','uses' => 'InvoiceController@update']);
 });

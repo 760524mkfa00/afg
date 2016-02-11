@@ -28,7 +28,7 @@ class Invoice extends Model
      */
     public function taxRates()
     {
-        return $this->belongsTo(TaxRate::class);
+        return $this->belongsTo(TaxRate::class, 'taxRate_id');
     }
 
 

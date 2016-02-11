@@ -47,7 +47,7 @@ class TrackingController extends Controller
 
     public function invoices($id)
     {
-        $data = Tracking::with('invoices')->find($id);
+        $data = Tracking::with('invoices', 'invoices.taxRates')->find($id);
 
 
         return view('invoices.invoice')

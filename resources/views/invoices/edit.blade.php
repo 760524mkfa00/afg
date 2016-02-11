@@ -14,10 +14,10 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">New Contractor...</div>
+                    <div class="panel-heading">Update Invoice...</div>
                     <div class="panel-body">
-                        {!! Form::model($data, array('route' => ['tracking.update', $data->id])) !!}
-                        @include('tracking.form', ['submitButtonText' => 'Update Contractor'])
+                        {!! Form::model($data, array('route' => ['invoice.update', $data->id])) !!}
+                        @include('invoices.form', ['submitButtonText' => 'Update Invoice'])
                         {!! Form::close() !!}
                     </div>
                 </div>
