@@ -13,7 +13,7 @@ class AfgTrackingTable extends Migration
     public function up()
     {
 
-        Schema::create('taxRates', function (Blueprint $table) {
+        Schema::create('taxrates', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('rate');
             $table->timestamps();
