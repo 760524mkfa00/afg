@@ -34,9 +34,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/projects/create', 'ProjectsController@create');
     Route::post('/projects', 'ProjectsController@store');
     Route::get('/projects/{id}/edit', ['as' => 'projects.edit','uses' => 'ProjectsController@edit']);
+    Route::get('/projects/{id}/balances', ['as' => 'projects.balances','uses' => 'ProjectsController@balances']);
     Route::post('/projects/{id}', ['as' => 'projects.update','uses' => 'ProjectsController@update']);
 
     Route::get('/chart',['as' => 'categories', 'uses' => 'ChartsController@chart']);
     Route::get('/chart/comparison',['as' => 'comparison', 'uses' => 'ChartsController@yearComparisonChart']);
+
+    Route::get('/tracking/create/{project}', ['as' => 'tracking.create','uses' => 'TrackingController@create']);
+    Route::post('/tracking', 'TrackingController@store');
+    Route::get('/tracking/{id}/edit', ['as' => 'tracking.edit','uses' => 'TrackingController@edit']);
+    Route::post('/tracking/{id}', ['as' => 'tracking.update','uses' => 'TrackingController@update']);
 
 });

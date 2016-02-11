@@ -49,7 +49,7 @@
                             <div id="projectData">
                                 @foreach($data as $project)
                                 <tr>
-                                    <th scope="row">{{ $project->project_number }}</th>
+                                    <th class="row"><a href="{{ route('projects.balances', $project->ID) }}">{{ $project->project_number }}</a></th>
                                     <td class="hidden-sm hidden-xs hidden-md">{{ $project->region }}</td>
                                     <td class="hidden-sm hidden-xs">{{ $project->category }}</td>
                                     <td class="hidden-sm hidden-xs">{{ $project->location }}</td>

@@ -64,5 +64,11 @@ class ProjectsController extends Controller
         return \Redirect::route('projects')->withMessage('Project Updated');
     }
 
+    public function balances($id)
+    {
+        $data = Afg::with('categories', 'clients', 'locations', 'priorities', 'regions', 'managers', 'tracking')->find($id);
+        return view('projects.balances')
+            ->withData($data);
+    }
 
 }

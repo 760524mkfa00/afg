@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tracking extends Model
 {
+
+    protected $table = 'tracking';
     /**
      * The attributes that are mass assignable.
      *
