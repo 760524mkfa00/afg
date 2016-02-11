@@ -4,7 +4,7 @@ namespace AFG;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Invoices extends Model
+class Invoice extends Model
 {
     /**
      * The attributes that are mass assignable.

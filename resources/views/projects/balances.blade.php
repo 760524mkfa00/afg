@@ -81,11 +81,11 @@
                             <tbody>
                                 @foreach($data->tracking as $track)
                                 <tr>
-                                    <td><a href="{{ route('tracking.edit', $track->id) }}"><i class="fa fa-pencil-square-o"></i></a></td>
+                                    <td><a href="{{ route('tracking.edit', [$track->id, $data->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td>{{ $track->description }}</td>
                                     <td>{{ $track->cvs }}</td>
                                     <td>Some Calculated Value</td>
-                                    <td style="color: #00A000; text-align: right;"><a href="#"><i class="fa fa-plus" ></i></a></td>
+                                    <td style="color: #00A000; text-align: right;"><a href="{{ route('tracking.invoices', $track->id) }}"><i class="fa fa-plus" ></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -96,5 +96,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function(){
+                $('.alert').fadeTo("slow", 0.1, function(){
+                    $('.alert').alert('close')
+                });
+            }, 3000)
+        });
+
+    </script>
 
 @stop

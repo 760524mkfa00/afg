@@ -28,18 +28,29 @@ class TrackingController extends Controller
         return \Redirect::route('projects.balances', $project_id)->withMessage('Contractor Added');
     }
 
-    public function edit($id)
+    public function edit($id, $project)
     {
         $data = Tracking::findOrNew($id);
-        return view('tracking.create')
-            ->withData($data);
+        return view('tracking.edit')
+            ->withData($data)
+            ->withProject($project);
     }
 
     public function update($id, Request $request)
     {
+        $project_id = $request->get('afg_id');
+
         Tracking::find($id)->update($request->all());
 
-//        return \Redirect::route('projects')->withMessage('Project Updated');
+        return \Redirect::route('projects.balances', $project_id)->withMessage('Contractor Updated');
+    }
+
+    public function invoices($id)
+    {
+        $data = Tracking::with('invoices')->find($id);
+
+        return view('invoices.invoice')
+            ->withData($data);
     }
 
 }

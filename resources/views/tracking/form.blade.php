@@ -1,3 +1,5 @@
+{!! Form::hidden('afg_id', $project) !!}
+
 <div class="form-group">
     {!! Form::label('description', 'Description of Commitments Against Budget:') !!}
     {!! Form::text('description', NULL, array('class' => 'form-control')) !!}

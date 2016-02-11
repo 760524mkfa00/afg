@@ -42,7 +42,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/tracking/create/{project}', ['as' => 'tracking.create','uses' => 'TrackingController@create']);
     Route::post('/tracking', 'TrackingController@store');
-    Route::get('/tracking/{id}/edit', ['as' => 'tracking.edit','uses' => 'TrackingController@edit']);
+    Route::get('/tracking/{id}/edit/{project}', ['as' => 'tracking.edit','uses' => 'TrackingController@edit']);
     Route::post('/tracking/{id}', ['as' => 'tracking.update','uses' => 'TrackingController@update']);
+
+    Route::get('/tracking/invoices/{id}', ['as' => 'tracking.invoices', 'uses' => 'TrackingController@invoices']);
+    Route::get('/tracking/invoices/create/{team}', ['as' => 'invoice.create','uses' => 'InvoiceController@create']);
 
 });
