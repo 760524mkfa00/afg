@@ -84,7 +84,7 @@
                                     <td><a href="{{ route('tracking.edit', [$track->id, $data->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td>{{ $track->description }}</td>
                                     <td>{{ $track->cvs }}</td>
-                                    <td>Some Calculated Value</td>
+                                    <td>{{ $track->id }}</td>
                                     <td style="color: #00A000; text-align: right;"><a href="{{ route('tracking.invoices', $track->id) }}"><i class="fa fa-plus" ></i></a></td>
                                 </tr>
                                 @endforeach

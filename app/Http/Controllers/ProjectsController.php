@@ -66,7 +66,23 @@ class ProjectsController extends Controller
 
     public function balances($id)
     {
-        $data = Afg::with('categories', 'clients', 'locations', 'priorities', 'regions', 'managers', 'tracking')->find($id);
+        $data = Afg::with('categories', 'clients', 'locations', 'priorities', 'regions', 'managers', 'tracking', 'tracking.invoices')->find($id);
+
+//        $total = $data->toArray();
+//        $test = [];
+//        foreach($total['tracking'] as $track)
+//        {
+//            $tID = $track['id'];
+//
+//            foreach($track['invoices'] as $invoice)
+//            {
+//                if ( ! isset($test[$tID]['fees'])) {
+//                $test[$tID]['fees'] = '0';
+//                }
+//                $test[$tID]['fees'] += $invoice['fees'];
+//             }
+////            // do the main totals here based on the totals from inner loop
+//        }
         return view('projects.balances')
             ->withData($data);
     }

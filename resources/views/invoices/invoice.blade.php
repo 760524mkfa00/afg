@@ -25,16 +25,24 @@
                                 <td>{{ $data->cvs }}</td>
                             </tr>
                             <tr>
+                                <td>Fees</td>
+                                <td>$ {{ number_format($data->fees,2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Hold Back</td>
+                                <td>$ {{ number_format($data->holdback,2) }}</td>
+                            </tr>
+                            <tr>
                                 <td>Sub Totals</td>
-                                <td>Sub Totals</td>
+                                <td>$ {{ number_format($data->subtotal,2) }}</td>
                             </tr>
                             <tr>
                                 <td>Totals</td>
-                                <td>Totals</td>
+                                <td>$ {{ number_format($data->total,2) }}</td>
                             </tr>
                             <tr>
                                 <td>Owing</td>
-                                <td>Owing</td>
+                                <td>$ {{ number_format($data->owing,2) }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -53,7 +61,6 @@
                                 <th>Invoice #</th>
                                 <th>Fees</th>
                                 <th>Hold Back</th>
-                                <th>Disbursements</th>
                                 <th>Sub Total</th>
                                 <th>Tax Rate</th>
                                 <th>Total</th>
@@ -66,10 +73,14 @@
                                     <td>{{ $invoice->invoice }}</td>
                                     <td>{{ number_format($invoice->fees,2) }}</td>
                                     <td>{{ number_format(($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0,2) }}</td>
-                                    <td>{{ number_format($invoice->disbursements,2) }}</td>
                                     <td>{{ number_format($invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0),2) }}</td>
-                                    <td>{{ $invoice->taxRates->rate }}</td>
-                                    <td>{{ number_format(( $invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0)) * $invoice->taxRates->rate, 2)}}</td>
+                                    <td>{{ ($invoice->taxRates->rate / 100) }}</td>
+                                    <td>
+                                        {{ number_format(
+                                            (($invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0))
+                                            * (1 + ($invoice->taxRates->rate / 100)))
+                                        , 2)}}
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

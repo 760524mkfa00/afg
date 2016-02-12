@@ -23,11 +23,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('disbursements', 'Disbursements:') !!}
-    {!! Form::text('disbursements', NULL, array('class' => 'form-control')) !!}
-</div>
-
-<div class="form-group">
     {!! Form::label('taxRate_id', 'Tax Rate:') !!}
     {!! Form::select('taxRate_id', $tax, NULL, array('class' => 'form-control')) !!}
 </div>

@@ -45,12 +45,14 @@ class InvoiceController extends Controller
             ->withTax($tax);
     }
 
-//    public function update($id, Request $request)
-//    {
-//        $project_id = $request->get('afg_id');
-//
-//        Tracking::find($id)->update($request->all());
-//
-//        return \Redirect::route('projects.balances', $project_id)->withMessage('Contractor Updated');
-//    }
+    public function update($id, Request $request)
+    {
+        $tracking_id = $request->get('tracking_id');
+
+        $request['holdback'] = $request->has('holdback') ? true : false;
+
+        Invoice::find($id)->update($request->all());
+
+        return \Redirect::route('tracking.invoices', $tracking_id)->withMessage('Invoice Updated');
+    }
 }
