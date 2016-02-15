@@ -22,7 +22,7 @@ class Tracking extends Model
      */
     public function afgs()
     {
-        return $this->belongsTo(Agf::class);
+        return $this->belongsTo(Agf::class, 'afg_id');
     }
 
     /**

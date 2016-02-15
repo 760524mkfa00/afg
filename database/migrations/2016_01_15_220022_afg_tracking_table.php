@@ -38,7 +38,7 @@ class AfgTrackingTable extends Migration
             $table->string('invoice');
             $table->double('fees', 12, 2);
             $table->boolean('holdback');
-            $table->double('disbursements', 12, 2);
+            $table->boolean('additional');
             $table->integer('taxRate_id')->unsigned();
             $table->timestamps();
 

@@ -29,6 +29,7 @@ class InvoiceController extends Controller
         $tracking = Tracking::find($tracking_id);
 
         $request['holdback'] = $request->has('holdback') ? true : false;
+        $request['additional'] = $request->has('additional') ? true : false;
 
         $tracking->invoices()->save(new Invoice($request->all()));
 
@@ -50,6 +51,7 @@ class InvoiceController extends Controller
         $tracking_id = $request->get('tracking_id');
 
         $request['holdback'] = $request->has('holdback') ? true : false;
+        $request['additional'] = $request->has('additional') ? true : false;
 
         Invoice::find($id)->update($request->all());
 

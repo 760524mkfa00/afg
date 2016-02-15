@@ -6,6 +6,12 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('additional', 'This is an additional cost(Disbursements etc.):') !!}
+    <br/>
+    {!! Form::checkbox('additional', NULL, NULL, array('class' => '')) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('invoice', 'Invoice #:') !!}
     {!! Form::text('invoice', NULL, array('class' => 'form-control')) !!}
 </div>
@@ -16,7 +22,6 @@
 </div>
 
 <div class="form-group">
-
     {!! Form::label('holdback', '10% Hold Back:') !!}
     <br/>
     {!! Form::checkbox('holdback', NULL, NULL, array('class' => '')) !!}

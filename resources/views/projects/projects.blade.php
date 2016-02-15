@@ -59,7 +59,7 @@
                                     <td class="hidden-sm hidden-xs">{{ $project->priority }}</td>
                                     <td class="hidden-sm hidden-xs">{{ $project->year }}</td>
                                     <td class="hidden-sm hidden-xs">{{ number_format($project->estimate,2,'.',',') }}</td>
-                                    <td class="hidden-sm hidden-xs">Actual Value</td>
+                                    <td class="hidden-sm hidden-xs">{{ number_format($committed[$project->ID]['total'],2) }}</td>
                                     <td class="hidden-sm hidden-xs hidden-md">{{ @$project->name }}</td>
                                     <td><a href="{{ route('projects.edit', $project->ID) }}"><i class="fa fa-pencil"></i></a></td>
                                 </tr>

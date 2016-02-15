@@ -54,7 +54,15 @@
                                 </tr>
                                 <tr>
                                     <td>Estimate</td>
-                                    <td>{{ $data->estimate }}</td>
+                                    <td>{{  number_format($data->estimate,2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Committed</td>
+                                    <td>{{ number_format($data->committed,2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surplus</td>
+                                    <td>{{ number_format($data->surplus,2) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Manager</td>
@@ -76,6 +84,8 @@
                                 <th>Description of Commitments Against Budget</th>
                                 <th>Contractor/Vendor/Supplier</th>
                                 <th>Committed without GST</th>
+                                <th>Additional costs without GST</th>
+                                <th>Committed with GST/s</th>
                                 <th style="text-align: right;">Add Invoice</th>
                             </thead>
                             <tbody>
@@ -84,7 +94,9 @@
                                     <td><a href="{{ route('tracking.edit', [$track->id, $data->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td>{{ $track->description }}</td>
                                     <td>{{ $track->cvs }}</td>
-                                    <td>{{ $track->id }}</td>
+                                    <td>{{ number_format($total[$track->id]['fees'],2) }}</td>
+                                    <td>{{ number_format($total[$track->id]['additional'],2) }}</td>
+                                    <td>{{ number_format($total[$track->id]['total'],2) }}</td>
                                     <td style="color: #00A000; text-align: right;"><a href="{{ route('tracking.invoices', $track->id) }}"><i class="fa fa-plus" ></i></a></td>
                                 </tr>
                                 @endforeach

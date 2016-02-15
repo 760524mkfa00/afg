@@ -86,6 +86,7 @@
                             </tbody>
                         </table>
                         <a href="{{ route('invoice.create', $data->id) }}" class="btn btn-primary">Add Invoice</a>
+                        <a href="{{ route('projects.balances', $data->afg_id) }}" class="btn btn-primary">Back to Project</a>
                     </div>
                 </div>
             </div>

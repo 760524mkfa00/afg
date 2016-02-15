@@ -12,7 +12,7 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
-        'tracking_id', 'scope', 'invoice', 'fees', 'holdback', 'disbursements', 'taxRate_id'
+        'tracking_id', 'scope', 'invoice', 'fees', 'holdback', 'disbursements', 'taxRate_id', 'additional'
     ];
 
     /**
@@ -20,7 +20,7 @@ class Invoice extends Model
      */
     public function tracking()
     {
-        return $this->belongsTo(Tracking::class);
+        return $this->belongsTo(Tracking::class, 'tracking_id');
     }
 
     /**

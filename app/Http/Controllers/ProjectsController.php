@@ -33,8 +33,25 @@ class ProjectsController extends Controller
         $str = $request->input('str');
         $year = $request->input('year');
 
+        $data = Afg::with('tracking', 'tracking.invoices')->get();
+        $total = [];
+
+        foreach($data as $item)
+        {
+            $total[$item->id]['total'] = compact(0);
+            foreach($item->tracking as $track)
+            {
+                foreach($track->invoices as $invoice)
+                {
+                    $total[$track->afg_id]['total'][] = $invoice->fees * (1 + ($invoice->taxRates->rate / 100));
+                }
+            }
+            $total[$item->id]['total'] = array_sum($total[$item->id]['total']);
+        }
+
         return view('projects.projects')
-            ->withData($this->project->getProjects(compact('sortBy', 'direction', 'str', 'year')));
+            ->withData($this->project->getProjects(compact('sortBy', 'direction', 'str', 'year')))
+            ->withCommitted($total);
     }
 
 
@@ -67,24 +84,40 @@ class ProjectsController extends Controller
     public function balances($id)
     {
         $data = Afg::with('categories', 'clients', 'locations', 'priorities', 'regions', 'managers', 'tracking', 'tracking.invoices')->find($id);
+        $total = [];
 
-//        $total = $data->toArray();
-//        $test = [];
-//        foreach($total['tracking'] as $track)
-//        {
-//            $tID = $track['id'];
-//
-//            foreach($track['invoices'] as $invoice)
-//            {
-//                if ( ! isset($test[$tID]['fees'])) {
-//                $test[$tID]['fees'] = '0';
-//                }
-//                $test[$tID]['fees'] += $invoice['fees'];
-//             }
-////            // do the main totals here based on the totals from inner loop
-//        }
+
+        foreach($data->tracking as $track)
+        {
+            $total[$track->id]['fees'][] = 0;
+            $total[$track->id]['additional'][] = 0;
+            $total[$track->id]['total'][] = 0;
+            foreach($track->invoices as $invoice)
+            {
+                if($invoice->additional)
+                {
+                    $total[$track->id]['additional'][] = $invoice->fees;
+                } else {
+                    $total[$track->id]['fees'][] = $invoice->fees;
+                }
+                $total[$track->id]['total'][] = $invoice->fees * (1 + ($invoice->taxRates->rate / 100));
+            }
+
+            $total[$track->id]['fees'] = array_sum($total[$track->id]['fees']);
+            $total[$track->id]['additional'] = array_sum($total[$track->id]['additional']);
+            $total[$track->id]['total'] = array_sum($total[$track->id]['total']);
+        }
+
+        foreach($total as $commit)
+        {
+            $data['committed'] += $commit['total'];
+        }
+
+        $data['surplus'] = $data->estimate - $data->committed;
+
         return view('projects.balances')
-            ->withData($data);
+            ->withData($data)
+            ->withTotal($total);
     }
 
 }
