@@ -61,6 +61,6 @@ class AfgTrackingTable extends Migration
     {
         Schema::drop('invoices');
         Schema::drop('tracking');
-        Schema::drop('taxRates');
+        Schema::drop('taxrates');
     }
 }
