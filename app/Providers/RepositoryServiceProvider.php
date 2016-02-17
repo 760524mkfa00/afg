@@ -24,5 +24,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('AFG\Services\Repositories\Afg\AfgRepository', 'AFG\Services\Repositories\Afg\DbAfgRepository');
+        $this->app->bind('AFG\Services\Repositories\Tracking\TrackingRepository', 'AFG\Services\Repositories\Tracking\DbTrackingRepository');
     }
 }

@@ -3,6 +3,7 @@
 namespace AFG\Services\Repositories\Afg;
 
 use AFG\Afg;
+use AFG\Tracking;
 use AFG\Services\Repositories\DbRepository;
 
 
@@ -78,4 +79,15 @@ class DbAfgRepository extends DbRepository implements AfgRepository {
     {
         return $params['sortBy'] and $params['direction'];
     }
+
+    public function projectTracking()
+    {
+        return Afg::with('tracking', 'tracking.invoices')->get();
+    }
+
+    public function projectAll($id)
+    {
+        return Afg::with('categories', 'clients', 'locations', 'priorities', 'regions', 'managers', 'tracking', 'tracking.invoices')->find($id);
+    }
+
 }

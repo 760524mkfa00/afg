@@ -2,14 +2,30 @@
 
 namespace AFG\Http\Controllers;
 
-use AFG\Afg;
 use AFG\Tracking;
 use AFG\Http\Requests;
 use Illuminate\Http\Request;
 use AFG\Http\Controllers\Controller;
+use AFG\Services\Tasks\trackingTasks;
+use AFG\Services\Repositories\Afg\AfgRepository;
+use AFG\Services\Repositories\Tracking\TrackingRepository;
 
 class TrackingController extends Controller
 {
+
+    protected $tracking;
+
+    protected $project;
+
+    protected $task;
+
+    public function __construct(TrackingRepository $tracking, AfgRepository $project, trackingTasks $task)
+    {
+        $this->middleware('auth');
+        $this->tracking = $tracking;
+        $this->project = $project;
+        $this->task = $task;
+    }
 
     public function create($project)
     {
@@ -21,7 +37,7 @@ class TrackingController extends Controller
     {
         $project_id = $request->get('afg_id');
 
-        $project = Afg::find($project_id);
+        $project = $this->project->getById($project_id);
 
         $project->tracking()->save(new Tracking($request->all()));
 
@@ -30,7 +46,7 @@ class TrackingController extends Controller
 
     public function edit($id, $project)
     {
-        $data = Tracking::findOrNew($id);
+        $data = $this->tracking->getById($id);
         return view('tracking.edit')
             ->withData($data)
             ->withProject($project);
@@ -39,25 +55,14 @@ class TrackingController extends Controller
     public function update($id, Request $request)
     {
         $project_id = $request->get('afg_id');
-
-        Tracking::find($id)->update($request->all());
+        $this->tracking->update($id, $request->all());
 
         return \Redirect::route('projects.balances', $project_id)->withMessage('Contractor Updated');
     }
 
     public function invoices($id)
     {
-        $data = Tracking::with('invoices', 'invoices.taxRates')->find($id);
-
-
-        foreach($data->invoices as $invoice)
-        {
-            $data['fees'] += $invoice->fees;
-            $data['holdback'] += ($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0;
-            $data['total'] += (($invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0)) * (1 + ($invoice->taxRates->rate / 100)));
-            $data['owing'] += (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0) * (1 + ($invoice->taxRates->rate / 100));
-        }
-        $data['subtotal'] = $data['fees'] - $data['holdback'];
+        $data = $this->task->invoiceTotals($id);
 
         return view('invoices.invoice')
             ->withData($data);
