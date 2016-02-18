@@ -7,6 +7,7 @@ use AFG\Http\Requests;
 use Illuminate\Http\Request;
 use AFG\Http\Controllers\Controller;
 use AFG\Services\Tasks\trackingTasks;
+use AFG\Http\Requests\TrackingRequest;
 use AFG\Services\Repositories\Afg\AfgRepository;
 use AFG\Services\Repositories\Tracking\TrackingRepository;
 
@@ -33,7 +34,7 @@ class TrackingController extends Controller
             ->withProject($project);
     }
 
-    public function store(Request $request)
+    public function store(TrackingRequest $request)
     {
         $project_id = $request->get('afg_id');
 
@@ -52,7 +53,7 @@ class TrackingController extends Controller
             ->withProject($project);
     }
 
-    public function update($id, Request $request)
+    public function update($id, TrackingRequest $request)
     {
         $project_id = $request->get('afg_id');
         $this->tracking->update($id, $request->all());

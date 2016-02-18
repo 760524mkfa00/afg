@@ -7,6 +7,7 @@ use AFG\TaxRate;
 use AFG\Tracking;
 use AFG\Http\Requests;
 use Illuminate\Http\Request;
+use AFG\Http\Requests\InvoiceRequest;
 use AFG\Http\Controllers\Controller;
 
 class InvoiceController extends Controller
@@ -21,7 +22,7 @@ class InvoiceController extends Controller
             ->withTax($tax);
     }
 
-    public function store(Request $request)
+    public function store(InvoiceRequest $request)
     {
 
         $tracking_id = $request->get('tracking_id');
@@ -46,7 +47,7 @@ class InvoiceController extends Controller
             ->withTax($tax);
     }
 
-    public function update($id, Request $request)
+    public function update($id, InvoiceRequest $request)
     {
         $tracking_id = $request->get('tracking_id');
 
