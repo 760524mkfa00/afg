@@ -31,6 +31,7 @@ class ProjectRequest extends Request
             'client_id' => 'required',
             'priority_number' => 'required',
             'priority_id' => 'required',
+            'year' => 'required',
         ];
     }
 }
