@@ -160,6 +160,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        willvincent\Feeds\FeedsServiceProvider::class,
     ],
 
     /*
@@ -208,6 +209,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
+        'Feeds'     => willvincent\Feeds\Facades\FeedsFacade::class,
 
     ],
 

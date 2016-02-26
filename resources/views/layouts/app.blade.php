@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="shortcut icon" type="image/png" href="/img/AFG-sml.png"/>
+    {{--<link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>--}}
     <title>Annual Facilities Grant</title>
 
     <!-- JavaScripts -->
@@ -52,7 +53,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    AFG
+                    <img src="{{ asset('img/AFG-sml.png') }}" alt="AFG" width="25%">
                 </a>
             </div>
 

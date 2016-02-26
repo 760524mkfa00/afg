@@ -8,5 +8,3 @@ function sort_projects_by($column, $body)
     $year = (Request::get('year')) ? Request::get('year') : '';
     return link_to_route('projects', $body, ['sortBy' => $column, 'direction' => $direction, 'str' => $search, 'year' => $year]);
 }
-
-

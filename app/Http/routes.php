@@ -12,8 +12,30 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+//    $feed = get_rss_feed_as_html('http://business.financialpost.com/feed/');
+//    $global = get_rss_feed_as_html('http://globalnews.ca/bc/feed/');
+
+    $feedA = Feeds::make('http://globalnews.ca/bc/feed/');
+    $global = array(
+        'title'     => $feedA->get_title(),
+        'permalink' => $feedA->get_permalink(),
+        'items'     => $feedA->get_items(),
+    );
+
+    $feedB = Feeds::make('http://business.financialpost.com/feed/');
+    $financial = array(
+        'title'     => $feedB->get_title(),
+        'permalink' => $feedB->get_permalink(),
+        'items'     => $feedB->get_items(),
+    );
+
+    return view('welcome')
+        ->withFinancial($financial)
+        ->withGlobal($global);
 });
+
+
 
 /*
 |--------------------------------------------------------------------------

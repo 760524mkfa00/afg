@@ -2,16 +2,15 @@
 
 @section('content')
 <div class="container island">
-    <div class="row" style="height:250px;">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="logo" >
-                {{--<img src="/img/login.png" >--}}
-            </div>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+            <img src="{{ asset('img/AFG-sml.png') }}" alt="AFG" width="">
+            <hr/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default" style="opacity: 0.6;">
+            <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
