@@ -13,21 +13,19 @@
 
 Route::get('/', function () {
 
-//    $feed = get_rss_feed_as_html('http://business.financialpost.com/feed/');
-//    $global = get_rss_feed_as_html('http://globalnews.ca/bc/feed/');
-
     $feedA = Feeds::make('http://globalnews.ca/bc/feed', 5);
+
     $global = array(
         'title'     => $feedA->get_title(),
         'permalink' => $feedA->get_permalink(),
-        'items'     => $feedA->get_items(),
+        'items'     => $feedA->get_items(0,5),
     );
 
     $feedB = Feeds::make('http://business.financialpost.com/feed', 5);
     $financial = array(
         'title'     => $feedB->get_title(),
         'permalink' => $feedB->get_permalink(),
-        'items'     => $feedB->get_items(),
+        'items'     => $feedB->get_items(0, 5),
     );
 
     return view('welcome')
@@ -72,4 +70,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/invoices', 'InvoiceController@store');
     Route::get('/invoices/{id}/edit/{team}', ['as' => 'invoice.edit','uses' => 'InvoiceController@edit']);
     Route::post('/invoices/{id}', ['as' => 'invoice.update','uses' => 'InvoiceController@update']);
+
+    Route::get('/import',['as' => 'import', 'uses' => 'ImportController@index']);
+    Route::post('/import',['as' => 'importing', 'uses' => 'ImportController@load']);
 });

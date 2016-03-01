@@ -40,10 +40,19 @@
                 <div class="panel-heading"><a href="{!! $global['permalink'] !!}">Latest from {!! $global['title'] !!}</a></div>
                 <div class="panel-body">
                     @foreach ($global['items'] as $item)
-                        <div class="item">
-                            <h4><a href="{!! $item->get_permalink() !!}">{!! $item->get_title() !!}</a></h4>
-                            <p><small>Posted on {!! $item->get_date('j F Y | g:i a') !!}</small></p>
-                            <p>{!! $item->get_description() !!}</p>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12">
+                                <h4><a href="{!! $item->get_permalink() !!}">{!! $item->get_title() !!}</a></h4>
+                                <p><small><em>Posted on {!! $item->get_date('j F Y | g:i a') !!}</em></small></p>
+                                @if ($enclosure = $item->get_enclosure())
+                                    @if($enclosure->get_thumbnail())
+                                        <div class="pull-left" style="margin-right: 10px;">
+                                            <a href="{{ $item->get_permalink() }}" title="{{ $item->get_title() }}"><img src="{{ $enclosure->get_thumbnail() }}" /></a>
+                                        </div>
+                                    @endif
+                                @endif
+                                <p>{!! $item->get_description() !!}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -55,10 +64,19 @@
                 <div class="panel-heading"><a href="{!! $financial['permalink'] !!}">Latest from {!! $financial['title'] !!}</a></div>
                 <div class="panel-body">
                     @foreach ($financial['items'] as $item)
-                        <div class="item">
-                            <h4><a href="{!! $item->get_permalink() !!}">{!! $item->get_title() !!}</a></h4>
-                            <p><small>Posted on {!! $item->get_date('j F Y | g:i a') !!}</small></p>
-                            <p>{!! $item->get_description() !!}</p>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-12">
+                                <h4><a href="{!! $item->get_permalink() !!}">{!! $item->get_title() !!}</a></h4>
+                                <p><small><em>Posted on {!! $item->get_date('j F Y | g:i a') !!}</em></small></p>
+                                @if ($enclosure = $item->get_enclosure())
+                                    @if($enclosure->get_thumbnail())
+                                        <div class="pull-left" style="margin-right: 10px;">
+                                            <a href="{{ $item->get_permalink() }}" title="{{ $item->get_title() }}"><img src="{{ $enclosure->get_thumbnail() }}" /></a>
+                                        </div>
+                                    @endif
+                                @endif
+                                <p>{!! $item->get_description() !!}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>
