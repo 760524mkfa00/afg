@@ -2,20 +2,20 @@
 
 namespace AFG\Http\Controllers;
 
-use AFG\Invoice;
 use AFG\Http\Requests;
-use Maatwebsite\Excel\Excel;
 use Illuminate\Http\Request;
 use AFG\Http\Controllers\Controller;
+use AFG\Services\Tasks\ExcelImportTask;
+
 
 class ImportController extends Controller
 {
 
-    protected $excel;
+    protected $task;
 
-    public function __construct(Excel $excel)
+    public function __construct(ExcelImportTask $task)
     {
-        $this->excel = $excel;
+        $this->task = $task;
     }
 
     public function index()
@@ -27,10 +27,11 @@ class ImportController extends Controller
 
     public function load(Request $request)
     {
-        $path = $request->file('file');
+        $excel = $request->file('file');
 
-        $file = $this->excel->load($path)->get();
-        $invoices = Invoice::all();
+        $this->task->upload($excel);
+        $file = $this->task->attach();
+
 
         return view('import.index')
             ->withFile($file);

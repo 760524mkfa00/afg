@@ -39,10 +39,10 @@
                                 <tbody>
                                 @foreach($file as $row)
                                     <tr>
-                                        <td>{{ $row->woid }}</td>
-                                        <td><a href="#" rel="tooltip" title="{{ $row->description }}">{{ str_limit($row->description, $limit = 75, $end = '...') }}</a></td>
-                                        <td>{{ number_format($row->total_costs,2) }}</td>
-                                        <td>match big tick!!!</td>
+                                        <td>{{ $row['woid'] }}</td>
+                                        <td><a href="#" rel="tooltip" title="{{ $row['description'] }}">{{ str_limit($row['description'], $limit = 75, $end = '...') }}</a></td>
+                                        <td>{{ number_format($row['total_costs'],2) }}</td>
+                                        <td style="text-align: center">{!! ($row['match']) ? '<i style="color:green;" class="fa fa-check"></i>' : '<i style="color:red;" class="fa fa-times"></i>' !!}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
