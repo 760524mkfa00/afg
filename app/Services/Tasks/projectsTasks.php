@@ -2,6 +2,7 @@
 
 namespace AFG\Services\Tasks;
 
+use AFG\Services\InvoiceTrait;
 use AFG\Services\Repositories\Afg\AfgRepository;
 
 
@@ -12,9 +13,12 @@ use AFG\Services\Repositories\Afg\AfgRepository;
 class projectsTasks
 {
 
+    use InvoiceTrait;
+
     protected $project;
 
     protected $balanceData;
+
     protected $balanceTotal;
 
     public function __construct(AfgRepository $project)
@@ -39,13 +43,17 @@ class projectsTasks
 
         foreach($data as $item)
         {
-            $total[$item->id]['total'] = compact(0);
+
+//            $total[$item->id]['total'] = compact(0);
             $invoiceTotal = 0;
+
             foreach($item->tracking as $track)
             {
                 $invoiceTotal += $this->totalInvoices($track);
             }
+
             $total[$item->id]['total'] = $invoiceTotal;
+
         }
         return $total;
     }
@@ -55,7 +63,7 @@ class projectsTasks
         $total = 0;
         foreach($data->invoices as $invoice)
         {
-            $total += $invoice->fees * (1 + ($invoice->taxRates->rate / 100));
+            $total += $this->invoiceTotal($invoice);
         }
         return $total;
     }
@@ -96,13 +104,18 @@ class projectsTasks
 
            foreach($track->invoices as $invoice)
            {
-               if($invoice->additional)
+
+
+               if($this->hasAdditional($invoice))
                {
-                   $total['additional'] += $invoice->fees;
+                   $total['additional'] += $this->fees($invoice);
                } else {
-                   $total['fees'] += $invoice->fees;
+                   $total['fees'] += $this->fees($invoice);
                }
-               $total['total'] += $invoice->fees * (1 + ($invoice->taxRates->rate / 100));
+
+
+
+               $total['total'] += $this->invoiceTotal($invoice);
            }
 
            $total[$track->id]['fees'] = $total['fees'];
@@ -113,16 +126,20 @@ class projectsTasks
        $this->balanceTotal = $total;
    }
 
+
+    protected function hasAdditional($invoice)
+    {
+        return $invoice->additional;
+    }
+
     protected function committed()
     {
-        foreach($this->balanceTotal as $commit)
-        {
-            $this->balanceData['committed'] += $commit['total'];
-        }
+        $this->balanceData['committed'] = array_sum(array_column($this->balanceTotal, 'total'));
     }
 
     protected function surplus()
     {
         $this->balanceData['surplus'] = $this->balanceData->estimate - $this->balanceData->committed;
     }
+
 }

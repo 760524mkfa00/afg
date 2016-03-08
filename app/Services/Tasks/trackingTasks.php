@@ -2,6 +2,7 @@
 
 namespace AFG\Services\Tasks;
 
+use AFG\Services\InvoiceTrait;
 use AFG\Services\Repositories\Tracking\TrackingRepository;
 
 
@@ -11,6 +12,7 @@ use AFG\Services\Repositories\Tracking\TrackingRepository;
  */
 class trackingTasks
 {
+    use InvoiceTrait;
 
     protected $tracking;
 
@@ -25,15 +27,14 @@ class trackingTasks
 
         foreach($data->invoices as $invoice)
         {
-            $data['fees'] += $invoice->fees;
-            $data['holdback'] += ($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0;
-            $data['total'] += (($invoice->fees - (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0)) * (1 + ($invoice->taxRates->rate / 100)));
-            $data['owing'] += (($invoice->holdback > 0) ? $invoice->fees * 0.1 : 0) * (1 + ($invoice->taxRates->rate / 100));
+            $data['fees'] += $this->fees($invoice);
+            $data['holdback'] += $this->holdback($invoice);
+            $data['total'] += $this->total($invoice);
+            $data['owing'] += $this->owing($invoice);
         }
         $data['subtotal'] = $data['fees'] - $data['holdback'];
 
         return $data;
     }
-
 
 }

@@ -30,47 +30,41 @@ class ExcelImportTask
 
     public function upload(UploadedFile $file)
     {
-        $this->file = $file;
+        $this->file = $this->excel->load($file)->toArray();
     }
 
     protected function match()
     {
-        $sheet = $this->excel->load($this->file)->toArray();
-        $invoice = $this->invoice->all()->toArray();
-
-        foreach($sheet as $row)
-        {
-            $rows[] = (int)$row['woid'];
-        }
-
-        foreach($invoice as $inv)
-        {
-            $invoices[] = $inv['invoice'];
-        }
-
-        return array_intersect($rows, $invoices);
+        return array_intersect($this->woidIDArray(), $this->invoiceIDArray());
     }
+
+    protected function woidIDArray()
+    {
+        return array_column($this->file, 'woid');
+    }
+
+    protected function invoiceIDArray()
+    {
+        return array_column($this->invoice->all()->toArray(), 'invoice');
+    }
+
 
     public function attach()
     {
-        $match = $this->match();
-        $sheet = $this->excel->load($this->file)->toArray();
 
-        foreach($sheet as $row)
+        foreach($this->file as $row)
         {
-            if (in_array((int)$row['woid'], $match))
-            {
-                $matched = true;
-            }
-            else
-            {
-                $matched = false;
-            }
-            $collection[] = collect(['woid' => $row['woid'], 'description' => $row['description'], 'total_costs' => $row['total_costs'], 'match' => $matched]);
+            $collection[] = collect(['woid' => $row['woid'], 'description' => $row['description'], 'total_costs' => $row['total_costs'], 'match' => $this->woidMatch((int)$row['woid'])]);
         }
 
     return $collection;
 
+    }
+
+    protected function woidMatch($woid)
+    {
+        $match = $this->match();
+        return in_array($woid, $match);
     }
 
 }
