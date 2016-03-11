@@ -44,7 +44,6 @@ class projectsTasks
         foreach($data as $item)
         {
 
-//            $total[$item->id]['total'] = compact(0);
             $invoiceTotal = 0;
 
             foreach($item->tracking as $track)
@@ -58,9 +57,8 @@ class projectsTasks
         return $total;
     }
 
-    protected function totalInvoices($data)
+    protected function totalInvoices($data, $total = null)
     {
-        $total = 0;
         foreach($data->invoices as $invoice)
         {
             $total += $this->invoiceTotal($invoice);
@@ -95,37 +93,23 @@ class projectsTasks
 
    protected function balanceTotals()
    {
-       $total = [];
        foreach($this->balanceData->tracking as $track)
        {
-           $total['fees'] = 0;
-           $total['additional'] = 0;
-           $total['total'] = 0;
+           $total[$track->id]['fees'] = 0;
+           $total[$track->id]['additional'] = 0;
+           $total[$track->id]['total'] = 0;
 
            foreach($track->invoices as $invoice)
            {
+               ($this->hasAdditional($invoice)) ? $total[$invoice->tracking_id]['additional'] += $this->fees($invoice) :
+                        $total[$invoice->tracking_id]['fees'] += $this->fees($invoice);
 
-
-               if($this->hasAdditional($invoice))
-               {
-                   $total['additional'] += $this->fees($invoice);
-               } else {
-                   $total['fees'] += $this->fees($invoice);
-               }
-
-
-
-               $total['total'] += $this->invoiceTotal($invoice);
+               $total[$invoice->tracking_id]['total'] += $this->invoiceTotal($invoice);
            }
-
-           $total[$track->id]['fees'] = $total['fees'];
-           $total[$track->id]['additional'] = $total['additional'];
-           $total[$track->id]['total'] = $total['total'];
        }
 
        $this->balanceTotal = $total;
    }
-
 
     protected function hasAdditional($invoice)
     {
